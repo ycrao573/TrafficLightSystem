@@ -25,8 +25,6 @@ void TrafficLight::doUpdate(int current_time)
 {
     ++current_state;
     if (current_state == state_pair.end()) {
-        updateLightSeq = true;
-        cout << "true";
         current_state = state_pair.begin();
     }
     lastUpdate = current_time;
@@ -38,11 +36,11 @@ string TrafficLight::getState()
 }
 
 void TrafficLight::addSecond() {
+    ++time;
     if (needsUpdate(time)) {
         doUpdate(time);
         cout << "Update" << endl;
     }
-    time++;
 }
 
 void TrafficLight::setDelays(int* delayPtr) {

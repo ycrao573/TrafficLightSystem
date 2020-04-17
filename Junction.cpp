@@ -3,3 +3,11 @@
 //
 
 #include "Junction.h"
+
+Junction::Junction() {
+
+}
+
+Junction::Junction(JunctionLight, vector<Road>) {
+
+}

@@ -37,8 +37,8 @@ void RoadUser::setNextDirection(char nextDirection) {
 }
 
 RoadUser::RoadUser() {
-    TODO
-    x = y = 0;
+    x = 0;
+    y = 0;
 }
 
 RoadUser::RoadUser(Junction junction, Road road) {

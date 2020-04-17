@@ -22,18 +22,15 @@ bool JunctionLight::needsUpdate(int current_time)
     if ((current_time - last_time) >= currentLight->period)
     {
         return true;
-        cout << "needsUpdate" << endl;
     }
     return false;
 }
 
 void JunctionLight::doUpdate(int current_time)
 {
-    //start the next light
-    if (currentLight == lightSeq.end())
-        currentLight = lightSeq.begin();
-    else
         ++currentLight;
+//    if (currentLight == lightSeq.end())
+//        currentLight = lightSeq.begin();
     cout << "Next Light Enabled" << endl;
     last_time = current_time;
 }

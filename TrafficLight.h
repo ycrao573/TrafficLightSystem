@@ -27,9 +27,8 @@ public:
 
     vector<pair<string, int>>::iterator current_state = state_pair.begin();
     int lastUpdate;
-    int Rtime, RAtime, Gtime, Atime;
+    int Rtime, RAtime = 1, Gtime, Atime = 1;
     int period;
-    bool updateLightSeq = false;
 
 private:
     int delayPtr[4] = { 2,1,2,1 };

@@ -11,6 +11,6 @@ int main(){
     TrafficLight* tra = new TrafficLight(delay);
     while (true) {
         junction->goNext();
-        Sleep(1000);
+        Sleep(200);
     }
 }

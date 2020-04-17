@@ -12,7 +12,7 @@ public:
     void moveNorth();
     void moveSouth();
     void moveEast();
-    vvoid moveWest();
+    void moveWest();
     void stop();
     void start();
     bool passJunction;
@@ -42,12 +42,12 @@ public:
     int getVelocity() const;
     void setVelocity(int velocity);
 };
-        |N              |N
-        +               |
-    *   |       *       |
-W==+===========+===============E
-    *   |       *       | *
-        +               |
-        S===============S
-                *
+//        |N              |N
+//        +               |
+//    *   |       *       |
+//W==+===========+===============E
+//    *   |       *       | *
+//        +               |
+//        S===============S
+//                *
 #endif //TRAFFICLIGHTSYSTEM_ROADUSER_H

@@ -8,7 +8,7 @@ class User
 {
 public:
     User();                              //constructor
-    ~User();                             //destructor
+//    ~User();                             //destructor
     User(string, int);
     void printUserType();
     virtual void moveNorth();

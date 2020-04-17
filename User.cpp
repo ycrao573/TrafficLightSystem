@@ -8,9 +8,9 @@ User::User()
     NumOfCars = 1;
 }
 
-User::~User()
-{
-}
+//User::~User()
+//{
+//}
 
 User::User(string UserSelection, int NumOfCars)
 {
@@ -46,4 +46,20 @@ User User::operator-(User a) {
     //decrease number of cars
     c.NumOfCars = this->NumOfCars - a.NumOfCars;
     return c;
+}
+
+void User::moveNorth() {
+
+}
+
+void User::moveSouth() {
+
+}
+
+void User::moveEast() {
+
+}
+
+void User::moveWest() {
+
 }
