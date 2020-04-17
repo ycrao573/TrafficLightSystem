@@ -9,21 +9,15 @@ public:
     RoadUser();
     RoadUser(Junction, Road);
     char direction[4] = {'N', 'S', 'W', 'E'};
-    void moveNorth();
-    void moveSouth();
-    void moveEast();
-    void moveWest();
+    void move();
     void stop();
     void start();
     bool passJunction;
     void changeDirection(char nextDirection);
     int x, y;
     const Junction &getCurrentJunction() const;
-    void setCurrentJunction(const Junction &currentJunction);
     const Road &getCurrentRoad() const;
-    void setCurrentRoad(const Road &currentRoad);
     char getCurrentDirection() const;
-    void setCurrentDirection(char currentDirection);
     char getNextDirection() const;
     void setNextDirection(char nextDirection);
 //    if(road->trafficLight = ???)

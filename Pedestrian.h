@@ -12,17 +12,25 @@ class Pedestrian: User {
 public:
     Pedestrian();
     Pedestrian(Junction, Road);
-    void moveNorth();
-    void moveSouth();
-    void moveEast();
-    void moveWest();
+    void move();
     int x, y;
-    Road currentRoad;
-    Junction currentJunction;
-    Junction nextJunction;
+    bool needUpdateJunction();
+    void updateRoad();
+    void updateJunction();
 
 private:
+    Road currentRoad;
+    Road nextRoad;
+    Junction currentJunction;
+    Junction nextJunction;
+public:
+    const Road &getNextRoad() const;
 
+    void setNextRoad(const Road &nextRoad);
+
+    const Junction &getNextJunction() const;
+
+    void setNextJunction(const Junction &nextJunction);
 };
 
 

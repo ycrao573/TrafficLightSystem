@@ -4,38 +4,6 @@
 
 #include "RoadUser.h"
 
-const Junction &RoadUser::getCurrentJunction() const {
-    return currentJunction;
-}
-
-void RoadUser::setCurrentJunction(const Junction &currentJunction) {
-    RoadUser::currentJunction = currentJunction;
-}
-
-const Road &RoadUser::getCurrentRoad() const {
-    return currentRoad;
-}
-
-void RoadUser::setCurrentRoad(const Road &currentRoad) {
-    RoadUser::currentRoad = currentRoad;
-}
-
-char RoadUser::getCurrentDirection() const {
-    return currentDirection;
-}
-
-void RoadUser::setCurrentDirection(char currentDirection) {
-    RoadUser::currentDirection = currentDirection;
-}
-
-char RoadUser::getNextDirection() const {
-    return nextDirection;
-}
-
-void RoadUser::setNextDirection(char nextDirection) {
-    RoadUser::nextDirection = nextDirection;
-}
-
 RoadUser::RoadUser() {
     x = 0;
     y = 0;
@@ -46,20 +14,19 @@ RoadUser::RoadUser(Junction junction, Road road) {
     this->currentRoad = road;
 }
 
-void RoadUser::moveNorth() {
-    y -= speed;
-}
-
-void RoadUser::moveSouth() {
-    y+=speed;
-}
-
-void RoadUser::moveEast() {
-    x+=speed;
-}
-
-void RoadUser::moveWest() {
-    x-=speed;
+void RoadUser::move(){
+    switch(currentRoad.getDirection()){
+        case 'n':
+            y-=speed;   break;
+        case 'w':
+            x-=speed;   break;
+        case 's':
+            y+=speed;   break;
+        case 'e':
+            x+=speed;   break;
+        default:
+            ;
+    }
 }
 
 void RoadUser::stop() {
@@ -80,4 +47,24 @@ void RoadUser::setVelocity(int velocity) {
 
 void RoadUser::start() {
     setVelocity(speed);
+}
+
+const Junction &RoadUser::getCurrentJunction() const {
+    return currentJunction;
+}
+
+const Road &RoadUser::getCurrentRoad() const {
+    return currentRoad;
+}
+
+char RoadUser::getCurrentDirection() const {
+    return currentDirection;
+}
+
+char RoadUser::getNextDirection() const {
+    return nextDirection;
+}
+
+void RoadUser::setNextDirection(char nextDirection) {
+    RoadUser::nextDirection = nextDirection;
 }
