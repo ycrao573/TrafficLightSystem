@@ -10,10 +10,6 @@ public:
     RoadUser(Junction, Road);
     char direction[4] = {'N', 'S', 'W', 'E'};
     void move();
-    void moveNorth(char);
-    void moveSouth(char);
-    void moveEast(char);
-    void moveWest(char);
     void stop();
     void start();
     bool passJunction;
