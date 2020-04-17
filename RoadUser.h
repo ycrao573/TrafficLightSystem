@@ -30,6 +30,11 @@ public:
 //        then stop()
 //    else
 //        then start()
+    
+    int getVelocity() const;
+    void setVelocity(int velocity);
+    
+    
 private:
     Junction currentJunction;
     Road currentRoad; //contains currentDirection
@@ -38,9 +43,6 @@ private:
     const int speed = 5;
     int velocity;
 
-public:
-    int getVelocity() const;
-    void setVelocity(int velocity);
 };
 //        |N              |N
 //        +               |
