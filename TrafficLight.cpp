@@ -1,5 +1,6 @@
 #include "TrafficLight.h"
 #include <iostream>
+#include "Windows.h"
 
 TrafficLight::TrafficLight() {
     lastUpdate = 0;
@@ -28,19 +29,27 @@ void TrafficLight::doUpdate(int current_time)
         current_state = state_pair.begin();
     }
     lastUpdate = current_time;
+}//1/4 cycle
+
+void TrafficLight::run_one_cycle() {
+    while(true){
+        cout << time << " " << getState() << endl;
+        ++time;
+        Sleep(1000);
+        if(time % period == 0) {
+            current_state = state_pair.begin();
+            cout << "end" << endl;
+            break;
+        }
+        if(needsUpdate(time))
+            doUpdate(time);
+    }
 }
+
 
 string TrafficLight::getState()
 {
     return current_state->first;
-}
-
-void TrafficLight::addSecond() {
-    ++time;
-    if (needsUpdate(time)) {
-        doUpdate(time);
-        cout << "Update" << endl;
-    }
 }
 
 void TrafficLight::setDelays(int* delayPtr) {
@@ -50,4 +59,3 @@ void TrafficLight::setDelays(int* delayPtr) {
     Atime = state_pair[3].second = delayPtr[3];
     period = Rtime + RAtime + Gtime + Atime;
 }
-

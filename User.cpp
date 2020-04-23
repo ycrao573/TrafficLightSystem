@@ -47,19 +47,3 @@ User User::operator-(User a) {
     c.NumOfCars = this->NumOfCars - a.NumOfCars;
     return c;
 }
-
-void User::moveNorth() {
-
-}
-
-void User::moveSouth() {
-
-}
-
-void User::moveEast() {
-
-}
-
-void User::moveWest() {
-
-}

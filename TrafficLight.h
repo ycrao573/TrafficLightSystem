@@ -15,7 +15,7 @@ public:
     string getState();
     void setDelays(int* delayPtr);
     int time = 0;
-    void addSecond();
+    void run_one_cycle();
 
     // combine state and delay in 1 field so we can always iterate together
     vector<pair<string, int>> state_pair = {
@@ -31,6 +31,6 @@ public:
     int period;
 
 private:
-    int delayPtr[4] = { 2,1,2,1 };
+    int delayPtr[4] = { 1,1,5,1 };
 };
 #endif //TRAFFICLIGHTSYSTEM_TRAFFICLIGHT_H

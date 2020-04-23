@@ -5,7 +5,6 @@
 #ifndef TRAFFICLIGHTSYSTEM_JUNCTION_H
 #define TRAFFICLIGHTSYSTEM_JUNCTION_H
 
-#include "JunctionLight.h"
 #include "Road.h"
 
 class Junction {
@@ -18,9 +17,16 @@ public:
     void goNext();
     int delayPtr[4];
     int junc_time = 0;
-    vector<Road> roadSeq;
-    vector<Road>::iterator currentRoad;
+    vector<Road> roadSeq = {
+            Road('n', 50, 20),
+            Road('e', 50, 20),
+            Road('s', 50, 20),
+            Road('w', 50, 20)
+    };
+    vector<Road>::iterator currentRoad = roadSeq.begin();
+    int ctr_x = 100, ctr_y = 100;
     int last_time = 0;
+    void simulate_one_tick();
 };
 
 

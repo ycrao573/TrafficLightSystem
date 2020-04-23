@@ -8,14 +8,12 @@ Road::Road() {
     this->direction = 'n';
     this->length = 50;
     this->width = 20;
-    trafficLight = TrafficLight(delayPtr);
 }
 
 Road::Road(char direction, int length, int width) {
     this->direction = direction;
     this->length = length;
     this->width = width;
-    trafficLight = TrafficLight(delayPtr);
 }
 
 char Road::getDirection() const {
@@ -40,4 +38,9 @@ int Road::getWidth() const {
 
 void Road::setWidth(int width) {
     Road::width = width;
+}
+
+void Road::setStrPt(int x, int y) {
+    str_x = x;
+    str_y = y;
 }

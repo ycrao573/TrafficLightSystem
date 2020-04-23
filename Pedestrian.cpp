@@ -52,5 +52,3 @@ const Junction &Pedestrian::getNextJunction() const {
 void Pedestrian::setNextJunction(const Junction &nextJunction) {
     Pedestrian::nextJunction = nextJunction;
 }
-
-

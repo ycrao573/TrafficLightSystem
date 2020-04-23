@@ -11,7 +11,7 @@ public:
 //    ~User();                             //destructor
     User(string, int);
     void printUserType();
-    virtual void move();
+    virtual void move(){};
     //operator overloading utilised so that...
     //when increase num of cars button is selected...
     //num of cars is increased
