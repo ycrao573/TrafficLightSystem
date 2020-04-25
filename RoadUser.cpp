@@ -22,6 +22,7 @@ void RoadUser::move(){
     while(true){
         cout << "(" << x << "," << y << ")";
         Sleep(1000);
+        isPassJunction();
         switch(currentRoad.getDirection()){
             case 'n':
                 y-=velocity;   break;
@@ -35,6 +36,10 @@ void RoadUser::move(){
                 ;
         }
     }
+}
+
+thread RoadUser::drive(){
+    return thread( [this] { this->move(); } );
 }
 
 void RoadUser::stop() {
@@ -87,14 +92,10 @@ bool RoadUser::isPassJunction() {
 }
 
 void RoadUser::thruJunction() {
-    while(true){
-        if(currentRoad.trafficLight->getState() == "G"){
-            start();
-            break;
-        }
-        else
-            stop();
-    }
+    if (currentRoad.trafficLight->getState() == "G") {
+        start();
+    } else
+        stop();
 }
 
 void RoadUser::setPt(int x, int y){

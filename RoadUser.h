@@ -10,6 +10,7 @@ public:
     RoadUser(Junction, Road);
     char direction[4] = {'n', 's', 'w', 'e'};
     void move();
+    thread drive();
     void stop();
     void start();
 

@@ -18,9 +18,15 @@ void Grid::doNext() {
 }
 
 void Grid::restart() {
-
+    //go back to login page
 }
 
-void Grid::sync(bool) {
+void Grid::sync(bool isSync) {
+    if (isSync){
+
+    }else{
+
+    }
+
 
 }

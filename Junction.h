@@ -23,10 +23,11 @@ public:
             Road('s', 50, 20),
             Road('w', 50, 20)
     };
+    thread simulate_one_tick();
     vector<Road>::iterator currentRoad = roadSeq.begin();
     int ctr_x = 100, ctr_y = 100;
     int last_time = 0;
-    void simulate_one_tick();
+    void tick();
 };
 
 

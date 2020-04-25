@@ -8,27 +8,11 @@
 using namespace std;
 
 Junction::Junction() {
-    //set start point for all the roads in junction
-//    for (currentRoad = roadSeq.begin(); currentRoad != roadSeq.end(); currentRoad++) {
-//        switch (currentRoad->getDirection()) {
-//            case 'n':
-//                currentRoad->setStrPt(100, 50);
-//                break;
-//            case 'w':
-//                currentRoad->setStrPt(50, 100);
-//                break;
-//            case 's':
-//                currentRoad->setStrPt(100, 150);
-//                break;
-//            case 'e':
-//                currentRoad->setStrPt(150, 100);
-//                break;
-//            default:;
-//        }
-        roadSeq[0].setStrPt(100,50);
-        roadSeq[1].setStrPt(50,100);
-        roadSeq[2].setStrPt(100,150);
-        roadSeq[3].setStrPt(150,100);
+        //set start point for all the roads in junction
+        roadSeq[0].setStrPt(ctr_x, ctr_y - roadSeq[0].getLength());
+        roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
+        roadSeq[2].setStrPt(ctr_x, ctr_y + roadSeq[2].getLength());
+        roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);
         currentRoad = roadSeq.begin();
 }
 
@@ -58,7 +42,7 @@ void Junction::goNext()
     cout << "total time: "<< junc_time << " Light time: " << currentRoad->trafficLight->time << " Color: " << currentRoad->trafficLight->getState() << endl;
 }
 
-void Junction::simulate_one_tick() {//north -> north
+void Junction::tick() {//north -> north
     while(true){
         cout << "Current Road: " << currentRoad->getDirection() << endl;
         //activate trafficlight
@@ -69,6 +53,9 @@ void Junction::simulate_one_tick() {//north -> north
     }
 }
 
+thread Junction::simulate_one_tick() {
+    return thread( [this] { this->tick(); } );
+}
 
 
 //Junction::Junction(vector<Road> roadSeq) {
