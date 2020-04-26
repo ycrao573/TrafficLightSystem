@@ -26,13 +26,12 @@ public:
             {"G", Gtime},
             {"A", Atime},
     };
-
     vector<pair<string, int>>::iterator current_state = state_pair.begin();
+
+
     int lastUpdate;
     int Rtime, RAtime = 1, Gtime, Atime = 1;
     int period;
-
-private:
     int delayPtr[4] = { 1,1,5,1 };
 };
 #endif //TRAFFICLIGHTSYSTEM_TRAFFICLIGHT_H

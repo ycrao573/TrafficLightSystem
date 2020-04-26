@@ -20,7 +20,6 @@ public:
     void doNext();
     void sync(bool);
 
-
 };
 
 

@@ -13,7 +13,6 @@ public:
     thread drive();
     void stop();
     void start();
-
     void changeDirection(char nextDirection);
     int x, y;
     const Junction &getCurrentJunction() const;
@@ -25,15 +24,23 @@ public:
     void setVelocity(int velocity);
     void setPt(int, int);
     void thruJunction();
-    
+    bool isPassJunction();
+    const Junction &getNextJunction() const;
+    void setNextJunction(Junction nextJunction);
+    const Road &getNextRoad() const;
+    void setNextRoad(const Road &nextRoad);
+    void setCurrentJunction(const Junction &currentJunction);
+    void setCurrentRoad(const Road &currentRoad);
+    void setCurrentDirection(char currentDirection);
+
 private:
     Junction currentJunction;
-    Road currentRoad; //contains currentDirection
+    Junction nextJunction;
+    Road currentRoad;
+    //contains currentDirection
+    Road nextRoad;
     char currentDirection;
     bool passJunction;
-public:
-    bool isPassJunction();
-private:
     char nextDirection; // will come to another road
     const int speed = 5;
     int velocity = speed;

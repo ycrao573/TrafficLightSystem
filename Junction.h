@@ -6,12 +6,13 @@
 #define TRAFFICLIGHTSYSTEM_JUNCTION_H
 
 #include "Road.h"
+#include "PedestrianLight.h"
 
 class Junction {
 //contains four roads(with single direction and one traffic light)
 public:
     Junction();
-    Junction(vector<Road>);
+//    Junction(vector<Road>);
     bool needsUpdate(int current_time);
     void doUpdate(int current_time);
     void goNext();
@@ -25,9 +26,16 @@ public:
     };
     thread simulate_one_tick();
     vector<Road>::iterator currentRoad = roadSeq.begin();
+    PedestrianLight pedestrianLight;
     int ctr_x = 100, ctr_y = 100;
     int last_time = 0;
     void tick();
+
+    void setCloseJunctions(Junction*, Junction*, Junction*, Junction*);
+    Junction *westJunction = nullptr;
+    Junction *eastJunction = nullptr;
+    Junction *northJunction = nullptr;
+    Junction *southJunction = nullptr;
 };
 
 
@@ -66,3 +74,7 @@ public:
 //
 //
 //#endif //TRAFFICLIGHTSYSTEM_JUNCTIONLIGHT_H
+//    void setWestJunction(Junction);
+//    void setEastJunction(Junction);
+//    void setNorthJunction(Junction);
+//    void setSouthJunction(Junction);

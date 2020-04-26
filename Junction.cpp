@@ -8,12 +8,13 @@
 using namespace std;
 
 Junction::Junction() {
-        //set start point for all the roads in junction
-        roadSeq[0].setStrPt(ctr_x, ctr_y - roadSeq[0].getLength());
-        roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
-        roadSeq[2].setStrPt(ctr_x, ctr_y + roadSeq[2].getLength());
-        roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);
-        currentRoad = roadSeq.begin();
+    //n: 100, 150 e: 50, 100 , s: 100, 50  , w 150, 100
+    //set start point for all the roads in junction
+    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
+    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
+    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength());
+    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);
+    currentRoad = roadSeq.begin();
 }
 
 bool Junction::needsUpdate(int current_time)
@@ -46,16 +47,36 @@ void Junction::tick() {//north -> north
     while(true){
         cout << "Current Road: " << currentRoad->getDirection() << endl;
         //activate trafficlight
+        while(currentRoad == roadSeq.end()) {
+            //let pedestiran go
+            //go to the first light
+            currentRoad = roadSeq.begin();
+            pedestrianLight.run_one_cycle();
+        }
         currentRoad->trafficLight->run_one_cycle();
         currentRoad++;
-        if(currentRoad == roadSeq.end())
-            currentRoad = roadSeq.begin();
     }
 }
 
 thread Junction::simulate_one_tick() {
     return thread( [this] { this->tick(); } );
 }
+
+void Junction::setCloseJunctions(Junction* west, Junction* east, Junction* north, Junction* south) {
+    westJunction = west;
+    eastJunction = east;
+    northJunction = north;
+    southJunction = south;
+    if(west)
+        west->eastJunction = this;
+    if(east)
+        east->westJunction = this;
+    if(north)
+        north->southJunction = this;
+    if(south)
+        south->northJunction = this;
+}
+
 
 
 //Junction::Junction(vector<Road> roadSeq) {
