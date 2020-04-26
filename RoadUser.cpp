@@ -2,6 +2,7 @@
 // Created by RYC on 2020/4/14.
 //
 
+
 #include "RoadUser.h"
 #include "Windows.h"
 #include <iostream>
@@ -20,6 +21,12 @@ RoadUser::RoadUser(Junction junction, Road road) {
 
 void RoadUser::move(){
     while(true){
+        if(getCurrentRoad().trafficLight->getState() == "R")
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+        else if(getCurrentRoad().trafficLight->getState() == "G")
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+        else
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
         cout << "(" << x << "," << y << ")" << endl;
         Sleep(1000);
         isPassJunction();

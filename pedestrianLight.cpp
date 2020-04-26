@@ -33,7 +33,7 @@ void PedestrianLight::setDelays(int period) {
 void PedestrianLight::run_one_cycle() {
     while(true){
         *current_state = state[1];
-        cout << "Pedestrian State: " << *current_state << endl;
+//        cout << "Pedestrian State: " << *current_state << endl;
         ++ped_time;
         Sleep(1000);
         if(ped_time % period == 0) {

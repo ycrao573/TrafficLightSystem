@@ -45,7 +45,7 @@ void Junction::goNext()
 
 void Junction::tick() {//north -> north
     while(true){
-        cout << "Current Road: " << currentRoad->getDirection() << endl;
+//        cout << "Current Road: " << currentRoad->getDirection() << endl;
         //activate trafficlight
         while(currentRoad == roadSeq.end()) {
             //let pedestiran go
