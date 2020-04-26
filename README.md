@@ -16,8 +16,7 @@ user  (car,  motorcycle  or  bike).  The  programme  should  have  the  ability 
 operation of light sequences (at each junction) to be globally synchronised or indeed to 
 work  independently  –  subject  to  the  requirement  that  no  junction  would  permit 
 contradicting  lights  to  be  “Green”  simultaneously.  No  deliberate  crashes!    As  a  first 
-consideration, the group may want to consider grid based road systems such as Glasgow  
-and New York  as exemplar networks.  It is left to the users to consider if filter lanes are 
+consideration, the group may want to consider grid based road systems such as Glasgow and New York  as exemplar networks.  It is left to the users to consider if filter lanes are 
 to be considered. 
 
 ### Notes 
