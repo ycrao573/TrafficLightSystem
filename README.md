@@ -24,4 +24,8 @@ Need  to  look  as  some  of  the  other  projects  as  there  is  a  link  with
 management. Note ascii characters – can change colours of display without the need to 
 for GUI code – although use of GUI would be good. 
 
+<img src="junction.png"
+     alt="junction"
+     style="float: left; margin-right: 10px;" />
+
 COPYRIGHT © 2020 Yuchen Rao & Logan Clark，All rights reserved.
