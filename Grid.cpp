@@ -16,6 +16,12 @@ void Grid::doNext() {
     cout << "New Network" << endl;
 }
 
+void Grid::Grid_Size(int length, int width) {
+    for(i = 0; i < length; i++) {
+        
+    }
+}
+
 void Grid::restart() {
     //go back to login page
 }
