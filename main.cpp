@@ -7,30 +7,72 @@
 
 using namespace std;
 
-int main(){
+int main() {
     cout << "==================================================" << endl
          << "Welcome to Traffic Light System Emulator!" << endl
          << "Created by Group 31: Logan Clark & Yuchen Rao" << endl
          << "==================================================" << endl;
     Grid *grid;
-    do
-    {
+    do {
         cout << '\n' << "Press 'Enter' Key to continue..." << endl;
     } while (cin.get() != '\n');
-
 
     string grid_size;
     cout << "Please Input Your Grid Size: (e.g. 2*2)" << endl;
     cin >> grid_size;
 
-    if(grid_size == "1*1")
-        grid = new Grid(1,1);
-    else if(grid_size == "2*2")
-        grid = new Grid(2,2);
+    if (grid_size == "1*1")
+        grid = new Grid(1, 1);
+    else if (grid_size == "2*2")
+        grid = new Grid(2, 2);
     else;
 
-    RoadUser *logan = new RoadUser(*grid->myNetwork[0], grid->myNetwork[0]->roadSeq[2]);
-    logan->juncSeq = {grid->myNetwork[2], grid->myNetwork[3], grid->myNetwork[1], grid->myNetwork[0]};
+
+    cout << "Input the path length: ";
+    int len;
+    cin >> len;
+
+    cout << "Choose Your Path: e.g. 1 \n 2 \n 4 \n 3";
+    int path[len];
+    for (int i = 0; i < len; ++i)
+    {
+        cin >> path[i];
+    }
+
+    cout << "Choose Your Start Road Direction: (e.g. n)";
+    char startRdDir;
+    cin >> startRdDir;
+
+    //initiate the roadUser
+
+    int startRd;
+    switch (startRdDir) {
+        case 'n':
+            startRd = 0;
+            break;
+        case 'e':
+            startRd = 1;
+            break;
+        case 's':
+            startRd = 2;
+            break;
+        case 'w':
+            startRd = 3;
+            break;
+
+        default:;
+    }
+    RoadUser *logan = new RoadUser(*grid->myNetwork[path[0]-1], grid->myNetwork[path[0]-1]->roadSeq[startRd]);
+//    logan->juncSeq = {grid->myNetwork[2], grid->myNetwork[3], grid->myNetwork[1], grid->myNetwork[0]};
+//    logan->juncSeqPtr = logan->juncSeq.begin();
+    //update the junction sequence
+    for(int i = 0; i < len; i++)
+        cout<<path[i];
+
+    for(int juncNo = 1; juncNo < len; juncNo++){
+        logan->juncSeq.push_back(grid->myNetwork[path[juncNo]-1]);
+        cout << "logan" << endl;
+    }
     logan->juncSeqPtr = logan->juncSeq.begin();
 
 //    Junction *junction1 = new Junction(100, 100);

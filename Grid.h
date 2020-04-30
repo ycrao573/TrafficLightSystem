@@ -14,6 +14,8 @@ class Grid {
 public:
     Grid();
     Grid(int len, int wid);
+    int len;
+    int wid;
     vector<Junction*> myNetwork;
     vector<Junction*>::iterator myJunction;
     vector<User*> users;

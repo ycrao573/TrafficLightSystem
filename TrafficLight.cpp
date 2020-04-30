@@ -14,6 +14,12 @@ TrafficLight::TrafficLight(int* delayPtr) {
     setDelays(delayPtr);
 }
 
+TrafficLight::TrafficLight(int *delayPtr, bool random){
+    if(random){
+//        current_state
+    }
+}
+
 bool TrafficLight::needsUpdate(int current_time)
 {
     if ((current_time - lastUpdate) >= current_state->second){

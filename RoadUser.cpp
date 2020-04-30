@@ -41,11 +41,8 @@ void RoadUser::move(){
             else
                 cout << "===PEDESTRIAN CROSSING!===" << endl;
         }
-
         Sleep(1000);
-
         isPassJunction();
-
         switch(currentRoad->getDirection()){
             case 'n':
                 y-=velocity;   break;
@@ -95,6 +92,7 @@ bool RoadUser::isPassJunction() {
 }
 
 void RoadUser::thruJunction() {
+
     if(juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x){
         cout << "You have reached your destination" << endl;
         stop();
