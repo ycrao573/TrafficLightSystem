@@ -5,8 +5,6 @@
 #include "Pedestrian.h"
 
 Pedestrian::Pedestrian() {
-    x = 0;
-    y = 0;
 }
 
 Pedestrian::Pedestrian(Junction junction, Road road) {
@@ -15,26 +13,7 @@ Pedestrian::Pedestrian(Junction junction, Road road) {
 }
 
 void Pedestrian::move() {
-    if(needUpdateJunction()){
-        updateJunction();
-    } else
-        updateRoad();
-}
 
-bool Pedestrian::needUpdateJunction() {
-//    if (x,y) is out of range, then setNextJunction = xxxJunction return true
-}
-
-void Pedestrian::updateJunction() {
-//    setNextJunction(xxxxx)
-    this->currentJunction = nextJunction;
-    updateRoad();
-}
-
-void Pedestrian::updateRoad() {
-    //if xxxx
-    //setNextRoad(xxx->xxxxRoad) road[]
-    this->currentRoad = nextRoad;
 }
 
 const Road &Pedestrian::getNextRoad() const {

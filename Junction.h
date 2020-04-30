@@ -12,6 +12,9 @@ class Junction {
 //contains four roads(with single direction and one traffic light)
 public:
     Junction();
+
+    Junction(int ctr_x, int ctr_y);
+
 //    Junction(vector<Road>);
     bool needsUpdate(int current_time);
     void doUpdate(int current_time);

@@ -13,16 +13,13 @@ class Grid {
 //contains Junction, User
 public:
     Grid();
-    vector<Junction> myNetwork;
-    vector<Junction>::iterator currentJunction;
-    vector<User> users;
-    void Grid_Size(int, int);
-    void restart();
+    Grid(int len, int wid);
+    vector<Junction*> myNetwork;
+    vector<Junction*>::iterator myJunction;
+    vector<User*> users;
     void doNext();
     void sync(bool);
- private:
-    int width;
-    int length;
+
 };
 
 

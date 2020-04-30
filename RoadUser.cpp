@@ -14,23 +14,39 @@ RoadUser::RoadUser() {
 }
 
 RoadUser::RoadUser(Junction junction, Road road) {
-    this->currentJunction = junction;
-    this->currentRoad = road;
+    this->currentJunction = &junction;
+    this->currentRoad = &road;
     setPt(road.str_x, road.str_y);
+    cout << "A CAR GENERATED!" << endl;
 }
 
 void RoadUser::move(){
-    while(true){
-        if(getCurrentRoad().trafficLight->getState() == "R")
+    while(!reachDestination){
+        //change font color showing the currentRoad color
+        if(currentRoad->trafficLight->getState() == "R")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-        else if(getCurrentRoad().trafficLight->getState() == "G")
+        else if(currentRoad->trafficLight->getState() == "G")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
         else
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-        cout << "(" << x << "," << y << ")" << endl;
+
+        //if velocity is not 0, show distance to the next Junction
+        if(velocity != 0)
+            cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y)) << " to the next junction.    Current Direction: " << currentRoad->getDirection() << endl;
+            //if velocity is 0, meaning car is waiting at junction
+        else{
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+            if(!currentJunction->pedestrianLight.canPass)
+                cout << "Waiting at junction..." << endl;
+            else
+                cout << "===PEDESTRIAN CROSSING!===" << endl;
+        }
+
         Sleep(1000);
+
         isPassJunction();
-        switch(currentRoad.getDirection()){
+
+        switch(currentRoad->getDirection()){
             case 'n':
                 y-=velocity;   break;
             case 'w':
@@ -57,10 +73,6 @@ void RoadUser::start() {
     setVelocity(speed);
 }
 
-void RoadUser::changeDirection(char nextDirection) {
-    this->nextDirection = nextDirection;
-}
-
 int RoadUser::getVelocity() const {
     return velocity;
 }
@@ -69,42 +81,34 @@ void RoadUser::setVelocity(int velocity) {
     RoadUser::velocity = velocity;
 }
 
-
-const Junction &RoadUser::getCurrentJunction() const {
-    return currentJunction;
-}
-
-const Road &RoadUser::getCurrentRoad() const {
-    return currentRoad;
-}
-
-char RoadUser::getCurrentDirection() const {
-    return currentDirection;
-}
-
-char RoadUser::getNextDirection() const {
-    return nextDirection;
-}
-
-void RoadUser::setNextDirection(char nextDirection) {
-    RoadUser::nextDirection = nextDirection;
-}
-
 bool RoadUser::isPassJunction() {
-    if(x == currentJunction.ctr_x && y == currentJunction.ctr_y){
+    if(x == currentJunction->ctr_x && y == currentJunction->ctr_y){
         thruJunction();
+        flag_passed = true;
         return true;
+    }else if(flag_passed) {
+        setNextJunction(*juncSeqPtr);
+        juncSeqPtr++;
+        flag_passed = false;
     }
     return false;
 }
 
 void RoadUser::thruJunction() {
-    if (currentRoad.trafficLight->getState() == "G") {
-        start();
+    if(juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x){
+        cout << "You have reached your destination" << endl;
+        stop();
+        reachDestination = true;
+    }else if (currentRoad->trafficLight->getState() == "G") {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+        cout << "Passing the junction NOW!!!" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
-    } else
-        stop();
+        start();
+    }else{
+        if(velocity != 0)
+            stop();
+    }
 }
 
 void RoadUser::setPt(int x, int y){
@@ -112,38 +116,26 @@ void RoadUser::setPt(int x, int y){
     this->y = y;
 }
 
-const Junction &RoadUser::getNextJunction() const {
-    return nextJunction;
-}
-
-void RoadUser::setNextJunction(Junction nextJunction) {
-    RoadUser::nextJunction = nextJunction;
-    if(currentJunction.northJunction = &nextJunction)
-        setNextRoad(nextJunction.roadSeq[0]);
-    if(currentJunction.eastJunction = &nextJunction)
-        setNextRoad(nextJunction.roadSeq[1]);
-    if(currentJunction.southJunction = &nextJunction)
-        setNextRoad(nextJunction.roadSeq[2]);
-    if(currentJunction.westJunction = &nextJunction)
-        setNextRoad(nextJunction.roadSeq[3]);
-}
-
-const Road &RoadUser::getNextRoad() const {
-    return nextRoad;
-}
-
-void RoadUser::setNextRoad(const Road &nextRoad) {
-    RoadUser::nextRoad = nextRoad;
-}
-
-void RoadUser::setCurrentJunction(const Junction &currentJunction) {
+void RoadUser::setCurrentJunction(Junction *currentJunction) {
     RoadUser::currentJunction = currentJunction;
 }
 
-void RoadUser::setCurrentRoad(const Road &currentRoad) {
+void RoadUser::setNextJunction(Junction *nextJunction) {
+    this->nextJunction = nextJunction;
+    if (currentJunction->northJunction == nextJunction)
+        setNextRoad(&nextJunction->roadSeq[0]);
+    else if (currentJunction->eastJunction == nextJunction)
+        setNextRoad(&nextJunction->roadSeq[1]);
+    else if (currentJunction->southJunction == nextJunction)
+        setNextRoad(&nextJunction->roadSeq[2]);
+    else if (currentJunction->westJunction == nextJunction)
+        setNextRoad(&nextJunction->roadSeq[3]);
+}
+
+void RoadUser::setCurrentRoad(Road *currentRoad) {
     RoadUser::currentRoad = currentRoad;
 }
 
-void RoadUser::setCurrentDirection(char currentDirection) {
-    RoadUser::currentDirection = currentDirection;
+void RoadUser::setNextRoad(Road *nextRoad) {
+    RoadUser::nextRoad = nextRoad;
 }

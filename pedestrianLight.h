@@ -19,13 +19,11 @@ public:
 //    void doUpdate(int current_time);
     string getState();
     void setDelays(int period);
-    int ped_time = 0;
     void run_one_cycle();
-    vector<string> state = {"R", "G"};
-    vector<string>::iterator current_state = state.begin();
+    bool canPass = false;
 
     int lastUpdate;
-    int period = 8;
+    int period = 3;
 };
 
 
