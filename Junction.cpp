@@ -8,7 +8,6 @@
 using namespace std;
 
 Junction::Junction() {
-    //n: 100, 150 e: 50, 100 , s: 100, 50  , w 150, 100
     //set start point for all the roads in junction
     roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
     roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
@@ -21,7 +20,6 @@ Junction::Junction(int ctr_x, int ctr_y, string name) {
     this->ctr_y = ctr_y;
     this->ctr_x = ctr_x;
     this->name = name;
-    //n: 100, 150 e: 50, 100 , s: 100, 50  , w 150, 100
     //set start point for all the roads in junction
     roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
     roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
@@ -34,26 +32,26 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     this->ctr_y = ctr_y;
     this->ctr_x = ctr_x;
     this->name = name;
-    switch(del_road) {
+    switch (del_road) {
         case 'n':
             roadSeq.erase(roadSeq.begin());
-        break;
+            break;
         case 'e':
             roadSeq.erase(roadSeq.begin() + 1);
-        break;
+            break;
         case 's':
             roadSeq.erase(roadSeq.begin() + 2);
-        break;
+            break;
         case 'w':
             roadSeq.erase(roadSeq.begin() + 3);
-        break;
+            break;
     }
 }
 
-void Junction::tick() {//north -> north
-    while(true){
+void Junction::tick() {//four directions of lights + pedestrian light
+    while (true) {
         //activate trafficlight
-        if(currentRoad == roadSeq.end()) {
+        if (currentRoad == roadSeq.end()) {
             //let pedestiran go
             //go to the first light
             currentRoad = roadSeq.begin();
@@ -65,28 +63,29 @@ void Junction::tick() {//north -> north
 }
 
 thread Junction::simulate_one_tick() {
-    return thread( [this] { this->tick(); } );
+    return thread([this] { this->tick(); });
 }
 
-void Junction::setCloseJunctions(Junction* west, Junction* east, Junction* north, Junction* south) {
+void Junction::setCloseJunctions(Junction *west, Junction *east, Junction *north, Junction *south) {
+    //setup the grid network (connect the junctions)
     westJunction = west;
     eastJunction = east;
     northJunction = north;
     southJunction = south;
-    if(west)
+    if (west)
         west->eastJunction = this;
-    if(east)
+    if (east)
         east->westJunction = this;
-    if(north)
+    if (north)
         north->southJunction = this;
-    if(south)
+    if (south)
         south->northJunction = this;
 }
 
 void Junction::generateIndepSeq() {
     //generate random time for the traffic light time sequence by randomising the green light
     srand((unsigned) time(0));
-    int delay[4] = {1,1,(1 + (rand() % 10)),1};
-    for(int index = 0; index < roadSeq.size(); index++)
+    int delay[4] = {1, 1, (1 + (rand() % 10)), 1};
+    for (int index = 0; index < roadSeq.size(); index++)
         this->roadSeq[index].trafficLight->setDelays(delay);
 }

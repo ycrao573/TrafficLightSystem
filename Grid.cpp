@@ -17,8 +17,7 @@ Grid::Grid(int len, int wid) {
     {
         myNetwork.push_back(new Junction(100, 100, "Junction 1"));
         myNetwork[0]->setCloseJunctions(nullptr, nullptr, nullptr, nullptr);
-    }
-    else if (len == 2 && wid == 1) {  //1*2 grid
+    } else if (len == 2 && wid == 1) {  //1*2 grid
         myNetwork.push_back(new Junction(100, 100, "Junction 1"));
         myNetwork.push_back(new Junction(150, 100, "Junction 2"));
         myNetwork[0]->setCloseJunctions(nullptr, myNetwork[1], nullptr, nullptr);

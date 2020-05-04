@@ -15,9 +15,6 @@ class PedestrianLight {
 public:
     PedestrianLight();
     PedestrianLight(int period);                              //constructor
-//    bool needsUpdate(int current_time);
-//    void doUpdate(int current_time);
-    string getState();
     void setDelays(int period);
     void run_one_cycle();
     bool canPass = false;

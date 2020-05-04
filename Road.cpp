@@ -20,24 +20,12 @@ char Road::getDirection() const {
     return direction;
 }
 
-void Road::setDirection(char direction) {
-    Road::direction = direction;
-}
-
 int Road::getLength() const {
     return length;
 }
 
-void Road::setLength(int length) {
-    Road::length = length;
-}
-
 int Road::getWidth() const {
     return width;
-}
-
-void Road::setWidth(int width) {
-    Road::width = width;
 }
 
 void Road::setStrPt(int x, int y) {
@@ -46,7 +34,7 @@ void Road::setStrPt(int x, int y) {
 }
 
 string Road::roadName(char) {
-    switch(getDirection()) {
+    switch (getDirection()) {
         case 'n':
             return "South Road";
         case 'w':

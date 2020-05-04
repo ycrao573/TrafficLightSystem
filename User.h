@@ -23,22 +23,18 @@ public:
     //when decrease num of cars button is selected...
     //num of cars is decreased
     User operator-(User);
-private:
-    string UserType;
-    int NumOfCars;
-
-public:
     void stop();
     void start();
     int x, y;
-
     int getSpeed();
     void setSpeed(int speed);
     int getVelocity();
-    int speed;
-    int velocity = speed;
     void setVelocity(int velocity);
     void setPt(int x, int y);
+    int speed;
+    int velocity = speed;
+private:
+    int NumOfCars;
 };
 
 #endif

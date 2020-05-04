@@ -1,22 +1,11 @@
 #include "User.h"
 #include <iostream>
+
 using namespace std;
 
-User::User()
-{
+User::User() {
     setPt(0, 0);
 }
-
-//User::User(string UserSelection, int NumOfCars)
-//{
-//    //set number of cars to user defined number
-//    this->NumOfCars = NumOfCars;
-//    //if condition to determine user type
-//    if (UserSelection == "Car" || UserSelection == "car")
-//        this->UserType = "Car";
-//    else if (UserSelection == "Pedestrian" || UserSelection == "pedestrian")
-//        this->UserType = "Pedestrian";
-//}
 
 //operator+ function definition for when...
 //increase numOfCars button is selected
@@ -50,7 +39,7 @@ void User::setVelocity(int velocity) {
     this->velocity = velocity;
 }
 
-void User::setPt(int x, int y){
+void User::setPt(int x, int y) {
     this->x = x;
     this->y = y;
 }

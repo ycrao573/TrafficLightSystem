@@ -9,7 +9,6 @@
 #include "PedestrianLight.h"
 
 class Junction {
-    //contains four roads(with single direction and one traffic light)
 public:
     Junction();
     Junction(int, int, string);
@@ -32,7 +31,6 @@ public:
     Junction *eastJunction = nullptr;
     Junction *northJunction = nullptr;
     Junction *southJunction = nullptr;
-    bool isAdjacent;
     int ctr_x = 100, ctr_y = 100;
 };
 
