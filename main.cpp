@@ -1,4 +1,3 @@
-#include "User.h"
 #include "Grid.h"
 #include "RoadUser.h"
 #include "Pedestrian.h"
@@ -59,11 +58,16 @@ int main() {
     }
 
 //User choose the role and path
-    string id;
+    string Type, RoadUserType;
     do {
-        cout << "Choose your role: Car(c) or Pedestrian(p): \n";
-        cin >> id;
-    } while (id != "c" && id != "p");
+        cout << "Choose your role: Road User(r) or Pedestrian(p): \n";
+        cin >> Type;
+        if (Type = "r")
+            do {
+                cout << "please specify your road user role: Car(c) or Bike(b) or Motorcycle(m) : \n";
+                cin >> RoadUserType;
+            } while (RoadUserType! = "c" && RoadUserType != "b" && RoadUserType != "m")
+    } while (Type != "r" && Type != "p");
 
 
     int len;
