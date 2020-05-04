@@ -8,15 +8,17 @@
 #include "Junction.h"
 #include "User.h"
 
-
+//class containing attributes and methods associated to a grid
 class Grid {
 //contains Junction, User
 public:
+    //constructor - no data provided
     Grid();
+    //constructor - data provided
     Grid(int len, int wid);
     int len, wid;
+    //grid consists of a vector of junctions
     vector<Junction*> myNetwork;
 };
-
 
 #endif //TRAFFICLIGHTSYSTEM_GRID_H
