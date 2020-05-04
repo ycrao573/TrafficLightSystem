@@ -2,15 +2,18 @@
 #ifndef USER_HPP
 #define USER_HPP
 #include <string>
+#include <vector>
+#include <thread>
+#include "Windows.h"
+#include "Junction.h"
 using namespace std;
 
 class User
 {
 public:
     User();                              //constructor
+    User(Junction junction, Road road);
 //    ~User();                             //destructor
-    User(string, int);
-    void printUserType();
     virtual void move(){};
     //operator overloading utilised so that...
     //when increase num of cars button is selected...
@@ -23,19 +26,19 @@ public:
 private:
     string UserType;
     int NumOfCars;
+
+public:
+    void stop();
+    void start();
+    int x, y;
+
+    int getSpeed();
+    void setSpeed(int speed);
+    int getVelocity();
+    int speed;
+    int velocity = speed;
+    void setVelocity(int velocity);
+    void setPt(int x, int y);
 };
 
 #endif
-
-/*
- * User -> Car or Pedestrian (Button Chosen) -> Car, Pedestrian inherits User class
- *
- * Button to adjust the car on the lane  --- later
- *
- * 1. configure a network of traffic lights (with or without a pedestrian crossing feature)
- * 2. set up a network of roads with sets of lights at each junction and then step through the network operation while a “car” or user journeys through the system
- * 3. The user may be a pedestrian or road user
- * 4. globally synchronised or indeed to work  independently
- * 5. It is left to the users to consider if filter lanes are to be considered.
- *
- * */

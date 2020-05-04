@@ -4,29 +4,19 @@ using namespace std;
 
 User::User()
 {
-    UserType = "Car";
-    NumOfCars = 1;
+    setPt(0, 0);
 }
 
-//User::~User()
+//User::User(string UserSelection, int NumOfCars)
 //{
+//    //set number of cars to user defined number
+//    this->NumOfCars = NumOfCars;
+//    //if condition to determine user type
+//    if (UserSelection == "Car" || UserSelection == "car")
+//        this->UserType = "Car";
+//    else if (UserSelection == "Pedestrian" || UserSelection == "pedestrian")
+//        this->UserType = "Pedestrian";
 //}
-
-User::User(string UserSelection, int NumOfCars)
-{
-    //set number of cars to user defined number
-    this->NumOfCars = NumOfCars;
-    //if condition to determine user type
-    if (UserSelection == "Car" || UserSelection == "car")
-        this->UserType = "Car";
-    else if (UserSelection == "Pedestrian" || UserSelection == "pedestrian")
-        this->UserType = "Pedestrian";
-}
-
-void User::printUserType()
-{
-    cout << "User Selection: " << UserType << endl;
-}
 
 //operator+ function definition for when...
 //increase numOfCars button is selected
@@ -46,4 +36,33 @@ User User::operator-(User a) {
     //decrease number of cars
     c.NumOfCars = this->NumOfCars - a.NumOfCars;
     return c;
+}
+
+void User::stop() {
+    setVelocity(0);
+}
+
+void User::start() {
+    setVelocity(speed);
+}
+
+void User::setVelocity(int velocity) {
+    this->velocity = velocity;
+}
+
+void User::setPt(int x, int y){
+    this->x = x;
+    this->y = y;
+}
+
+int User::getSpeed() {
+    return speed;
+}
+
+void User::setSpeed(int speed) {
+    this->speed = speed;
+}
+
+int User::getVelocity() {
+    return velocity;
 }

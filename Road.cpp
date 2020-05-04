@@ -7,7 +7,7 @@
 Road::Road() {
     this->direction = 'n';
     this->length = 50;
-    this->width = 20;
+    this->width = 5;
 }
 
 Road::Road(char direction, int length, int width) {
@@ -44,3 +44,20 @@ void Road::setStrPt(int x, int y) {
     str_x = x;
     str_y = y;
 }
+
+string Road::roadName(char) {
+    switch(getDirection()) {
+        case 'n':
+            return "South Road";
+        case 'w':
+            return "East Road";
+        case 's':
+            return "North Road";
+        case 'e':
+            return "West Road";
+        default:
+            return "";
+    }
+}
+
+

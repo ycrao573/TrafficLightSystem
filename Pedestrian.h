@@ -13,24 +13,23 @@ public:
     Pedestrian();
     Pedestrian(Junction, Road);
     void move();
-    int x, y;
-    bool needUpdateJunction();
-    void updateRoad();
-    void updateJunction();
+    thread walk();
+    void thruJunction();
+    bool isPassJunction();
+    vector<Junction*> juncSeq;
+    vector<Junction*>::iterator juncSeqPtr;
+    void setCurrentJunction(Junction *currentJunction);
+    void setNextJunction(Junction *nextJunction);
+    void setCurrentRoad(Road *currentRoad);
+    void setNextRoad(Road *nextRoad);
+    bool reachDestination = false;
 
 private:
-    Road currentRoad;
-    Road nextRoad;
-    Junction currentJunction;
-    Junction nextJunction;
-public:
-    const Road &getNextRoad() const;
-
-    void setNextRoad(const Road &nextRoad);
-
-    const Junction &getNextJunction() const;
-
-    void setNextJunction(const Junction &nextJunction);
+    Junction* currentJunction;
+    Junction* nextJunction;
+    Road* currentRoad;
+    Road* nextRoad;
+    bool flag_passed = true;
 };
 
 

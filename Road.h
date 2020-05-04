@@ -6,6 +6,7 @@
 #define TRAFFICLIGHTSYSTEM_ROAD_H
 
 #include "TrafficLight.h"
+#include "stdlib.h"
 
 class Road {
 public:
@@ -22,6 +23,7 @@ public:
     void setStrPt(int, int);
     int delayPtr[4] = {1,1,5,1};
     TrafficLight *trafficLight = new TrafficLight(delayPtr);
+    string roadName(char);
 private:
     char direction;
     int length, width;

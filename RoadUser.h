@@ -10,38 +10,22 @@ public:
     RoadUser(Junction, Road);
     void move();
     thread drive();
-    void stop();
-    void start();
-    int x, y;
-    int getVelocity() const;
-    void setVelocity(int velocity);
-    void setPt(int, int);
     void thruJunction();
     bool isPassJunction();
     vector<Junction*> juncSeq;
     vector<Junction*>::iterator juncSeqPtr;
-
-private:
-    Junction* currentJunction;
-public:
     void setCurrentJunction(Junction *currentJunction);
-
     void setNextJunction(Junction *nextJunction);
-
     void setCurrentRoad(Road *currentRoad);
-
     void setNextRoad(Road *nextRoad);
     bool reachDestination = false;
 
 private:
+    Junction* currentJunction;
     Junction* nextJunction;
     Road* currentRoad;
     Road* nextRoad;
-    bool passJunction;
-    const int speed = 5;
-    int velocity = speed;
     bool flag_passed = true;
-
 };
 //        |N              |N
 //        +               |

@@ -21,9 +21,8 @@ public:
     void setDelays(int period);
     void run_one_cycle();
     bool canPass = false;
-
-    int lastUpdate;
-    int period = 3;
+    bool isCrossing = false;
+    int period = 8;
 };
 
 

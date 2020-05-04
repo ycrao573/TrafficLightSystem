@@ -17,33 +17,38 @@ Junction::Junction() {
     currentRoad = roadSeq.begin();
 }
 
-Junction::Junction(int ctr_x, int ctr_y) {
+Junction::Junction(int ctr_x, int ctr_y, string name) {
     this->ctr_y = ctr_y;
     this->ctr_x = ctr_x;
+    this->name = name;
     //n: 100, 150 e: 50, 100 , s: 100, 50  , w 150, 100
     //set start point for all the roads in junction
-    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength() - 5);
-    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength() + 5, ctr_y);
-    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength() + 5);
-    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength() - 5, ctr_y);
+    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
+    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
+    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength());
+    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);
     currentRoad = roadSeq.begin();
 }
-//
-//bool Junction::needsUpdate(int current_time)
-//{
-//    if ((current_time - last_time) >= currentRoad->trafficLight->period)
-//    {
-//        return true;
-//    }
-//    return false;
-//}
-//
-//void Junction::doUpdate(int current_time)
-//{
-//    ++currentRoad;
-//    cout << "Next Light Enabled" << endl;
-//    last_time = current_time;
-//}
+
+Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
+    this->ctr_y = ctr_y;
+    this->ctr_x = ctr_x;
+    this->name = name;
+    switch(del_road) {
+        case 'n':
+            roadSeq.erase(roadSeq.begin());
+        break;
+        case 'e':
+            roadSeq.erase(roadSeq.begin() + 1);
+        break;
+        case 's':
+            roadSeq.erase(roadSeq.begin() + 2);
+        break;
+        case 'w':
+            roadSeq.erase(roadSeq.begin() + 3);
+        break;
+    }
+}
 
 void Junction::tick() {//north -> north
     while(true){
@@ -52,7 +57,7 @@ void Junction::tick() {//north -> north
             //let pedestiran go
             //go to the first light
             currentRoad = roadSeq.begin();
-            pedestrianLight.run_one_cycle();
+            pedestrianLight->run_one_cycle();
         }
         currentRoad->trafficLight->run_one_cycle();
         currentRoad++;
@@ -76,4 +81,12 @@ void Junction::setCloseJunctions(Junction* west, Junction* east, Junction* north
         north->southJunction = this;
     if(south)
         south->northJunction = this;
+}
+
+void Junction::generateIndepSeq() {
+    //generate random time for the traffic light time sequence by randomising the green light
+    srand((unsigned) time(0));
+    int delay[4] = {1,1,(1 + (rand() % 10)),1};
+    for(int index = 0; index < roadSeq.size(); index++)
+        this->roadSeq[index].trafficLight->setDelays(delay);
 }

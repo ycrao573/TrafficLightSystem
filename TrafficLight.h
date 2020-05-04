@@ -11,7 +11,6 @@ class TrafficLight {
 public:
     TrafficLight();
     TrafficLight(int *delayPtr);                              //constructor
-    TrafficLight(int *delayPtr, bool random);
 
     bool needsUpdate(int current_time);
     void doUpdate(int current_time);

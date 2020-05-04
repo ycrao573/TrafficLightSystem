@@ -12,20 +12,16 @@ PedestrianLight::PedestrianLight(int period) {
     setDelays(period);
 }
 
-//bool PedestrianLight::needsUpdate(int current_time) {
-//    return false;
-//}
-//
-//void PedestrianLight::doUpdate(int current_time) {
-//
-//}
-
 void PedestrianLight::setDelays(int period) {
     this->period = period;
 }
 
 void PedestrianLight::run_one_cycle() {
     canPass = true;
-    Sleep(1000 * period);
+    int count = 0;
+    while(count < period){
+        Sleep(1000);
+        count++;
+    }
     canPass = false;
 }

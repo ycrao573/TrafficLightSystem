@@ -9,75 +9,31 @@
 #include "PedestrianLight.h"
 
 class Junction {
-//contains four roads(with single direction and one traffic light)
+    //contains four roads(with single direction and one traffic light)
 public:
     Junction();
-
-    Junction(int ctr_x, int ctr_y);
-
-//    Junction(vector<Road>);
-    bool needsUpdate(int current_time);
-    void doUpdate(int current_time);
-    void goNext();
-    int delayPtr[4];
-    int junc_time = 0;
+    Junction(int, int, string);
+    Junction(int, int, string, char);
+    //contains four roads(with single direction and one traffic light)
     vector<Road> roadSeq = {
-            Road('n', 50, 20),
-            Road('e', 50, 20),
-            Road('s', 50, 20),
-            Road('w', 50, 20)
+            Road('n', 50, 5),
+            Road('e', 50, 5),
+            Road('s', 50, 5),
+            Road('w', 50, 5)
     };
     thread simulate_one_tick();
     vector<Road>::iterator currentRoad = roadSeq.begin();
-    PedestrianLight pedestrianLight;
-    int ctr_x = 100, ctr_y = 100;
-    int last_time = 0;
+    PedestrianLight* pedestrianLight = new PedestrianLight(8);
     void tick();
-
+    string name;
+    void generateIndepSeq();
     void setCloseJunctions(Junction*, Junction*, Junction*, Junction*);
     Junction *westJunction = nullptr;
     Junction *eastJunction = nullptr;
     Junction *northJunction = nullptr;
     Junction *southJunction = nullptr;
+    bool isAdjacent;
+    int ctr_x = 100, ctr_y = 100;
 };
 
-
 #endif //TRAFFICLIGHTSYSTEM_JUNCTION_H
-
-
-//
-// Created by RYC on 2020/4/13.
-//
-//
-//#ifndef TRAFFICLIGHTSYSTEM_JUNCTIONLIGHT_H
-//#define TRAFFICLIGHTSYSTEM_JUNCTIONLIGHT_H
-//
-//#include <vector>
-//#include <string>
-//#include "TrafficLight.h"
-//
-//using namespace std;
-//
-//class JunctionLight {
-//public:
-//    JunctionLight(int* delayPtr, int lightNum);                              //constructor
-//
-//    int last_time = 0;
-//    //there are 3-4 lights in a junction
-//    TrafficLight light[4];
-//    vector<TrafficLight>lightSeq;
-//    vector<TrafficLight>::iterator currentLight;
-//    bool needsUpdate(int current_time);
-//    void doUpdate(int current_time);
-//    void goNext();
-//    int delayPtr[4];
-//    int lightNum = 3;
-//    int junc_time = 0;
-//};
-//
-//
-//#endif //TRAFFICLIGHTSYSTEM_JUNCTIONLIGHT_H
-//    void setWestJunction(Junction);
-//    void setEastJunction(Junction);
-//    void setNorthJunction(Junction);
-//    void setSouthJunction(Junction);
