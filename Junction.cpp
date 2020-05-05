@@ -4,9 +4,9 @@
 
 #include "Junction.h"
 #include <iostream>
-
 using namespace std;
 
+//function definition for constructor - no data provided
 Junction::Junction() {
     //set start point for all the roads in junction
     roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
@@ -16,6 +16,7 @@ Junction::Junction() {
     currentRoad = roadSeq.begin();
 }
 
+//function definition for constructor for cross junction - data provided
 Junction::Junction(int ctr_x, int ctr_y, string name) {
     this->ctr_y = ctr_y;
     this->ctr_x = ctr_x;
@@ -28,10 +29,13 @@ Junction::Junction(int ctr_x, int ctr_y, string name) {
     currentRoad = roadSeq.begin();
 }
 
+//function definition for constructor for T junction - data provided
 Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     this->ctr_y = ctr_y;
     this->ctr_x = ctr_x;
     this->name = name;
+    //removes a road from cross junction 
+    //generates T junction
     switch (del_road) {
         case 'n':
             roadSeq.erase(roadSeq.begin());
@@ -48,6 +52,7 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     }
 }
 
+//function definition for simulating one junction
 void Junction::tick() {//four directions of lights + pedestrian light
     while (true) {
         //activate trafficlight
@@ -62,16 +67,21 @@ void Junction::tick() {//four directions of lights + pedestrian light
     }
 }
 
+//function definition for executing junction functionality simultaneously
+//with the rest of the system
 thread Junction::simulate_one_tick() {
     return thread([this] { this->tick(); });
 }
 
+//function definition for connecting adjacent junctions to current junction
 void Junction::setCloseJunctions(Junction *west, Junction *east, Junction *north, Junction *south) {
     //setup the grid network (connect the junctions)
     westJunction = west;
     eastJunction = east;
     northJunction = north;
     southJunction = south;
+    //connects current junction and the adjacent junctions in both ways
+    //e.g. west road of current junction would connect to east road of adjacent junction
     if (west)
         west->eastJunction = this;
     if (east)
@@ -82,6 +92,7 @@ void Junction::setCloseJunctions(Junction *west, Junction *east, Junction *north
         south->northJunction = this;
 }
 
+//function definition for setting up independent traffic lights
 void Junction::generateIndepSeq() {
     //generate random time for the traffic light time sequence by randomising the green light
     srand((unsigned) time(0));
