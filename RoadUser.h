@@ -10,7 +10,8 @@ public:
     //constructor - when no data is provided
     RoadUser();
     //constructor - when data is provided
-    RoadUser(Junction, Road);
+    RoadUser(Junction junction, Road road, string type);
+
     void move();
     //executes drive functionality simultaneosuly to traffic light functionality
     thread drive();
@@ -27,6 +28,7 @@ public:
     void setCurrentRoad(Road *currentRoad);
     void setNextRoad(Road *nextRoad);
     bool reachDestination = false;
+    string type = "c";
 private:
     Junction* currentJunction;
     Junction* nextJunction;
