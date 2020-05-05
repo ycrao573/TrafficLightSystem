@@ -19,7 +19,6 @@ public:
     int time = 0;
     void run_one_cycle();
 
-
     // combine state and delay in 1 field so we can always iterate together
     vector<pair<string, int>> state_pair = {
             {"R", Rtime},

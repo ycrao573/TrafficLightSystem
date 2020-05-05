@@ -1,4 +1,3 @@
-#include "User.h"
 #include "Grid.h"
 #include "RoadUser.h"
 #include "Pedestrian.h"

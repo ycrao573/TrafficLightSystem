@@ -18,8 +18,7 @@ public:
     int getWidth() const;
     int str_x, str_y;
     void setStrPt(int, int);
-    int delayPtr[4] = {1,1,5,1};
-    TrafficLight *trafficLight = new TrafficLight(delayPtr);
+    TrafficLight *trafficLight = new TrafficLight();
     string roadName(char);
 private:
     char direction;
