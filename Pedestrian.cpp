@@ -5,12 +5,12 @@
 #include "Pedestrian.h"
 
 Pedestrian::Pedestrian() {
-    setSpeed(2);
+    setSpeed(1);
     setVelocity(getSpeed());
 }
 
 Pedestrian::Pedestrian(Junction junction, Road road) {
-    setSpeed(2);
+    setSpeed(1);
     setVelocity(getSpeed());
     this->currentJunction = &junction;
     this->currentRoad = &road;

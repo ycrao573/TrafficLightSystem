@@ -10,18 +10,26 @@ using namespace std;
 //function definition for constructor - no data provided
 RoadUser::RoadUser() {
     setPt(0, 0);
-    setSpeed(5);
+    setSpeed(10);
     setVelocity(getSpeed());
 }
 
 //function definition for constructor - data provided
-RoadUser::RoadUser(Junction junction, Road road) {
-    setSpeed(5);
+RoadUser::RoadUser(Junction junction, Road road, string type) {
+    if(type == "c"){
+        setSpeed(10);
+        cout << "A CAR GENERATED!" << endl;
+    }else if(type == "b"){
+        setSpeed(2);
+        cout << "A BIKE GENERATED!" << endl;
+    }else if(type == "m"){
+        setSpeed(5);
+        cout << "A MOTORCYCLE GENERATED!" << endl;
+    }
     setVelocity(getSpeed());
     this->currentJunction = &junction;
     this->currentRoad = &road;
     setPt(road.str_x, road.str_y);
-    cout << "A CAR GENERATED!" << endl;
 }
 
 //function definition for movement of road user
