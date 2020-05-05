@@ -26,10 +26,10 @@ for GUI code – although use of GUI would be good.
 
 ### Visualization
 
-#### Junctio
+#### Junction
 <img src="junction.png"
-     alt="junction"
-     style="float: left; margin-right: 10px;" />
+     alt="junction" width="200" height="200"
+     style="float: left; margin-right: 10px; " />
      
 #### UML Diagram
 <img src="ClassDiagram1.jpg"
