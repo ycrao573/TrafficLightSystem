@@ -16,6 +16,7 @@ RoadUser::RoadUser() {
 
 //function definition for constructor - data provided
 RoadUser::RoadUser(Junction junction, Road road, string type) {
+    //generate and set different speeds for each road user type
     if(type == "c"){
         setSpeed(10);
         cout << "A CAR GENERATED!" << endl;
@@ -27,6 +28,8 @@ RoadUser::RoadUser(Junction junction, Road road, string type) {
         cout << "A MOTORCYCLE GENERATED!" << endl;
     }
     setVelocity(getSpeed());
+    //to ensure road user is in the junction
+    //address of current junction is assigned to instance of junction passed by ref
     this->currentJunction = &junction;
     this->currentRoad = &road;
     setPt(road.str_x, road.str_y);
@@ -35,7 +38,7 @@ RoadUser::RoadUser(Junction junction, Road road, string type) {
 //function definition for movement of road user
 void RoadUser::move() {
     while (!reachDestination) {
-        //change font color showing the currentRoad color
+        //change font colour to show the state of the traffic light of the currrent road
         if (currentRoad->trafficLight->getState() == "R")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
         else if (currentRoad->trafficLight->getState() == "G")
@@ -51,14 +54,18 @@ void RoadUser::move() {
                  << currentJunction->name << endl;
             //if velocity is 0, car is waiting at the junction
         else {
+            //sets font colour back to black (default)
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
             if (!currentJunction->pedestrianLight->canPass)
                 cout << "Waiting at junction..." << endl;
             else
                 cout << "===PEDESTRIAN CROSSING!===" << endl;
         }
+        //generates 1 second time interval
         Sleep(1000);
+        //need to check each second, if user has reached junction
         isPassJunction();
+        //movement according to direction chosen by user
         switch (currentRoad->getDirection()) {
             case 'n':
                 y -= velocity;
@@ -77,15 +84,21 @@ void RoadUser::move() {
     }
 }
 
+//function definition for executing road user's movement simultaneously
+//with the rest of the system
 thread RoadUser::drive() {
     return thread([this] { this->move(); });
 }
 
+//function definition to check if user has reached junction
 bool RoadUser::isPassJunction() {
+    //if user has reached junction, user turns (direction depends on user path)
+    //junction is then passed 
     if (x == currentJunction->ctr_x && y == currentJunction->ctr_y) {
         thruJunction();
         flag_passed = true;
         return true;
+    //as user has already passed junction, next junction is set 
     } else if (flag_passed) {
         setNextJunction(*juncSeqPtr);
         juncSeqPtr++;
@@ -94,11 +107,14 @@ bool RoadUser::isPassJunction() {
     return false;
 }
 
-void RoadUser::thruJunction() {
+//function definition for changing user direction once they have reached junction
+void RoadUser::thruJunction() {  
+    //if destination has been reached, stop program
     if (juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x) {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
+    //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
     } else if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
         cout << "PASSING THE JUNCTION NOW" << endl;
@@ -106,17 +122,22 @@ void RoadUser::thruJunction() {
         setCurrentJunction(nextJunction);
         start();
     } else {
+        //road user cannot pass junction as a pedstrian is crossing the road and current road's traffic light is red
         if (getVelocity() != 0)
             stop();
     }
 }
 
+//function definition for setting current junction
 void RoadUser::setCurrentJunction(Junction *currentJunction) {
     RoadUser::currentJunction = currentJunction;
 }
 
+//function definition for setting next junction
 void RoadUser::setNextJunction(Junction *nextJunction) {
     this->nextJunction = nextJunction;
+    //if next junction is north of the current junction
+    //road of next junction set to south road
     if (currentJunction->northJunction == nextJunction)
         setNextRoad(&nextJunction->roadSeq[0]);
     else if (currentJunction->eastJunction == nextJunction)
@@ -127,10 +148,12 @@ void RoadUser::setNextJunction(Junction *nextJunction) {
         setNextRoad(&nextJunction->roadSeq[3]);
 }
 
+//function definition for setting current road
 void RoadUser::setCurrentRoad(Road *currentRoad) {
     RoadUser::currentRoad = currentRoad;
 }
 
+//function definition for setting next road
 void RoadUser::setNextRoad(Road *nextRoad) {
     RoadUser::nextRoad = nextRoad;
 }
