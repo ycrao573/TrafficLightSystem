@@ -2,18 +2,19 @@
 // Created by RYC on 2020/4/14.
 //
 
-
 #include "RoadUser.h"
+//allows user to input and output to the system
 #include <iostream>
-
 using namespace std;
 
+//function definition for constructor - no data provided
 RoadUser::RoadUser() {
     setPt(0, 0);
     setSpeed(5);
     setVelocity(getSpeed());
 }
 
+//function definition for constructor - data provided
 RoadUser::RoadUser(Junction junction, Road road) {
     setSpeed(5);
     setVelocity(getSpeed());
@@ -23,6 +24,7 @@ RoadUser::RoadUser(Junction junction, Road road) {
     cout << "A CAR GENERATED!" << endl;
 }
 
+//function definition for movement of road user
 void RoadUser::move() {
     while (!reachDestination) {
         //change font color showing the currentRoad color
@@ -39,7 +41,7 @@ void RoadUser::move() {
                  << " to the Light.    Current Direction: " << currentRoad->getDirection() <<
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
-            //if velocity is 0, meaning car is waiting at junction
+            //if velocity is 0, car is waiting at the junction
         else {
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
             if (!currentJunction->pedestrianLight->canPass)
