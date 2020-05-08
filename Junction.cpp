@@ -52,6 +52,14 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     }
 }
 
+
+Junction::~Junction() {
+    if(!roadSeq.empty() || pedestrianLight != nullptr){
+        roadSeq.clear();
+        delete[] pedestrianLight;
+    }
+}
+
 //function definition for simulating one junction
 void Junction::tick() {//four directions of lights + pedestrian light
     while (true) {
@@ -100,3 +108,4 @@ void Junction::generateIndepSeq() {
     for (int index = 0; index < roadSeq.size(); index++)
         this->roadSeq[index].trafficLight->setDelays(delay);
 }
+

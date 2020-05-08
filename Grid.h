@@ -16,6 +16,7 @@ public:
     Grid();
     //constructor - data provided
     Grid(int len, int wid);
+    ~Grid();
     int len, wid;
     //grid consists of a vector of junctions
     vector<Junction*> myNetwork;

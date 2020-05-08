@@ -83,3 +83,8 @@ Grid::Grid(int len, int wid) {
              << " junction7    junction8    junction9\n\n\n";
     }
 }
+
+Grid::~Grid() {
+    if(!myNetwork.empty())
+        myNetwork.clear();
+}

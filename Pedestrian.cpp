@@ -84,7 +84,7 @@ void Pedestrian::thruJunction() {
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
         //generates time interval taken for pedestrain to cross road
-        Sleep(currentRoad->getWidth() / getSpeed() * 2000);
+        Sleep(currentRoad->getWidth() / getSpeed() * 1000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;
         start();

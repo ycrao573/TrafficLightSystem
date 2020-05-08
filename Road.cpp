@@ -57,4 +57,9 @@ string Road::roadName(char) {
     }
 }
 
+Road::~Road() {
+    if(trafficLight!=NULL)
+        delete [] trafficLight;
+}
+
 

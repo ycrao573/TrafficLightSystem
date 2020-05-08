@@ -18,6 +18,7 @@ public:
     //constructor for T Junction - data provided
     Junction(int, int, string, char);
     //contains four roads (with single direction and one traffic light)
+    ~Junction();
     vector<Road> roadSeq = {
             Road('n', 50, 5),
             Road('e', 50, 5),

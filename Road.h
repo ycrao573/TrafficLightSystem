@@ -16,6 +16,7 @@ public:
     Road();
     // constructor - creates instance when data is provided
     Road(char, int, int);
+    ~Road();
     char getDirection() const;
     int getLength() const;
     int getWidth() const;
