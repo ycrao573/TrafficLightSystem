@@ -20,6 +20,11 @@ Road::Road(char direction, int length, int width) {
     this->width = width;
 }
 
+Road::~Road() {
+    if(trafficLight!=nullptr)
+        delete trafficLight;
+}
+
 //function definition for returning road direction
 char Road::getDirection() const {
     return direction;
@@ -56,10 +61,3 @@ string Road::roadName(char) {
             return "";
     }
 }
-
-Road::~Road() {
-    if(trafficLight!=NULL)
-        delete [] trafficLight;
-}
-
-

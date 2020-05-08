@@ -20,10 +20,10 @@ public:
     //contains four roads (with single direction and one traffic light)
     ~Junction();
     vector<Road> roadSeq = {
-            Road('n', 50, 5),
-            Road('e', 50, 5),
-            Road('s', 50, 5),
-            Road('w', 50, 5)
+        Road('n', 50, 5),
+        Road('e', 50, 5),
+        Road('s', 50, 5),
+        Road('w', 50, 5)
     };
     //execute light sequence functionality simultaneously with junction functionality
     thread simulate_one_tick();
