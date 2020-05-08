@@ -17,6 +17,9 @@ int main() {
         cout << '\n' << "Press 'Enter' Key to continue..." << endl;
     } while (cin.get() != '\n');
 
+    cout << "\n==================================================" << endl
+         << "                    Map Setting                   " << endl
+         << "==================================================" << endl;
 //input grid size
 grid:
     string grid_size;
@@ -38,6 +41,9 @@ grid:
     }
     cout << "Network has been set up!\n";
 
+    cout << "\n\n==================================================" << endl
+         << "                Traffic Light Setting             " << endl
+         << "==================================================" << endl;
 //user decides if traffic lights are syncronised or working independently
 syncronize:
     string ans;
@@ -57,7 +63,11 @@ syncronize:
     for (int count = 0; count < grid->len * grid->wid; count++) {
         jThread[count] = grid->myNetwork[count]->simulate_one_tick();
     }
+    cout << "Traffic Light System Start\n";
 
+    cout << "\n\n==================================================" << endl
+         << "                    User Setting                  " << endl
+         << "==================================================\n" << endl;
 //User chooses the role and path
     string Type, RoadUserType;
     do {
@@ -171,10 +181,6 @@ path:
             //executes motorcycle movement simultaneously with the functionality of the rest of the system
             roadUserThread = motorcycle->drive();
         }
-    }
-    //iterates through grid and joins the threads of each junction, light sequence etc
-    for (int count = 0; count < grid->len * grid->wid; count++) {
-        jThread[count].join();
     }
     //joins road user and pedestrian threads, ensuring they are executed simultaneously
     roadUserThread.join();
