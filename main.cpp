@@ -12,14 +12,11 @@ int main() {
          << "Welcome to Traffic Light System Emulator!" << endl
          << "Created by Group 31: Logan Clark & Yuchen Rao" << endl
          << "==================================================" << endl;
-    Grid *grid;
+    Grid *grid = nullptr;
     do {
         cout << '\n' << "Press 'Enter' Key to continue..." << endl;
     } while (cin.get() != '\n');
 
-    cout << "\n==================================================" << endl
-         << "                    Map Setting                   " << endl
-         << "==================================================" << endl;
 //input grid size
 grid:
     string grid_size;
@@ -41,9 +38,6 @@ grid:
     }
     cout << "Network has been set up!\n";
 
-    cout << "\n\n==================================================" << endl
-         << "                Traffic Light Setting             " << endl
-         << "==================================================" << endl;
 //user decides if traffic lights are syncronised or working independently
 syncronize:
     string ans;
@@ -59,15 +53,11 @@ syncronize:
         goto syncronize;
 
 //create thread array for junction light sequence
-    thread jThread[grid->len * grid->wid];
+    vector<thread> jThread;
     for (int count = 0; count < grid->len * grid->wid; count++) {
-        jThread[count] = grid->myNetwork[count]->simulate_one_tick();
+        jThread.push_back(grid->myNetwork[count]->simulate_one_tick());
     }
-    cout << "Traffic Light System Start\n";
 
-    cout << "\n\n==================================================" << endl
-         << "                    User Setting                  " << endl
-         << "==================================================\n" << endl;
 //User chooses the role and path
     string Type, RoadUserType;
     do {
@@ -89,11 +79,14 @@ syncronize:
     } while (len <= 0 || len > 20);
 
 //choose the path traversal sequence
-    int path[len];
+    
 path:
+    vector<int> path;
     cout << "Choose Your Path: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
     for (int i = 0; i < len; ++i) {
-        cin >> path[i];
+        int temp;
+        cin >> temp;
+        path.push_back(temp);
         //ensures that path cannot be negative or greater than grid dimensions
         if (path[i] <= 0 || path[i] > grid->len * grid->wid) {
             cout << "Invalid Input!\n";
@@ -117,7 +110,7 @@ path:
     }
     //condition to ensure correct start road is associated with user input
     while (startRdDir != "n" && startRdDir != "e" && startRdDir != "s" && startRdDir != "w");
-    int startRd;
+    int startRd = 0;
     switch (startRdDir[0]) {
         case 'n':
             startRd = 0;

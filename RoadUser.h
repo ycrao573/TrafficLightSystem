@@ -10,7 +10,7 @@ public:
     //constructor - when no data is provided
     RoadUser();
     //constructor - when data is provided
-    RoadUser(Junction junction, Road road, string type);
+    RoadUser(Junction &junction, Road &road, string type);
 
     void move();
     //executes drive functionality simultaneosuly to traffic light functionality
@@ -30,10 +30,10 @@ public:
     bool reachDestination = false;
     string type = "c";
 private:
-    Junction* currentJunction;
-    Junction* nextJunction;
-    Road* currentRoad;
-    Road* nextRoad;
+    Junction* currentJunction = nullptr;
+    Junction* nextJunction = nullptr;
+    Road* currentRoad = nullptr;
+    Road* nextRoad = nullptr;
     //variable to represent whether road user has passed the previous junction
     bool flag_passed = true;
 };

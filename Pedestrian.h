@@ -13,8 +13,7 @@ class Pedestrian: User {
 public:
     //constructor - no data provided
     Pedestrian();
-    //constructor - data provided
-    Pedestrian(Junction, Road);
+    Pedestrian(Junction& junction, Road& road);
     void move();
     //executes walking functionality simultaneously with traffic light and pedestrian light functionality
     thread walk();
@@ -26,16 +25,16 @@ public:
     vector<Junction*> juncSeq;
     //iterator to walk through vector of junctions
     vector<Junction*>::iterator juncSeqPtr;
-    void setCurrentJunction(Junction *currentJunction);
-    void setNextJunction(Junction *nextJunction);
-    void setCurrentRoad(Road *currentRoad);
-    void setNextRoad(Road *nextRoad);
+    void setCurrentJunction(Junction* currentJunction);
+    void setNextJunction(Junction* nextJunction);
+    void setCurrentRoad(Road* currentRoad);
+    void setNextRoad(Road* nextRoad);
     bool reachDestination = false;
 private:
-    Junction* currentJunction;
-    Junction* nextJunction;
-    Road* currentRoad;
-    Road* nextRoad;
+    Junction* currentJunction = nullptr;
+    Junction* nextJunction = nullptr;
+    Road* currentRoad = nullptr;
+    Road* nextRoad = nullptr;
     //variable to represent whether road user has passed the previous junction
     bool flag_passed = true;
 };

@@ -10,6 +10,10 @@ User::User() {
     setPt(0, 0);
 }
 
+User::User(Junction junction, Road road)
+{
+}
+
 //function definiton for adding more cars to the road
 User User::operator+(User a) {
     //create new instance of User class

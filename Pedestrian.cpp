@@ -11,7 +11,7 @@ Pedestrian::Pedestrian() {
 }
 
 //function definition for constructor - data provided
-Pedestrian::Pedestrian(Junction junction, Road road) {
+Pedestrian::Pedestrian(Junction &junction, Road &road) {
     //set pedestrian starting position to user defined junction and road
     setSpeed(1);
     setVelocity(getSpeed());
@@ -113,12 +113,12 @@ bool Pedestrian::isPassJunction() {
 }
 
 //function definition for setting current junction
-void Pedestrian::setCurrentJunction(Junction *currentJunction) {
+void Pedestrian::setCurrentJunction(Junction* currentJunction) {
     this->currentJunction = currentJunction;
 }
 
 //function definition for setting next junction
-void Pedestrian::setNextJunction(Junction *nextJunction) {
+void Pedestrian::setNextJunction(Junction* nextJunction) {
     //connects junction to adjacent junction
     //if next junction is north, next road is set to south road
     this->nextJunction = nextJunction;
@@ -133,11 +133,11 @@ void Pedestrian::setNextJunction(Junction *nextJunction) {
 }
 
 //function definition for setting current road
-void Pedestrian::setCurrentRoad(Road *currentRoad) {
+void Pedestrian::setCurrentRoad(Road* currentRoad) {
     this->currentRoad = currentRoad;
 }
 
 //function definition for setting next road
-void Pedestrian::setNextRoad(Road *nextRoad) {
+void Pedestrian::setNextRoad(Road* nextRoad) {
     this->nextRoad = nextRoad;
 }

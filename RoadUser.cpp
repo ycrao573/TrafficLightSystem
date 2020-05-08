@@ -15,7 +15,7 @@ RoadUser::RoadUser() {
 }
 
 //function definition for constructor - data provided
-RoadUser::RoadUser(Junction junction, Road road, string type) {
+RoadUser::RoadUser(Junction& junction, Road& road, string type) {
     //generate and set different speeds for each road user type
     if(type == "c"){
         setSpeed(10);
@@ -55,7 +55,7 @@ void RoadUser::move() {
             //if velocity is 0, car is waiting at the junction
         else {
             //sets font colour back to black (default)
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
             if (!currentJunction->pedestrianLight->canPass)
                 cout << "Waiting at junction..." << endl;
             else
@@ -114,9 +114,10 @@ void RoadUser::thruJunction() {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
+        exit(0);
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
     } else if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
         cout << "PASSING THE JUNCTION NOW" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
