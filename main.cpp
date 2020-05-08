@@ -83,6 +83,8 @@ syncronize:
 path:
     vector<int> path;
     cout << "Choose Your Path: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
+    //creates a vector where each element represents 
+    //which junctions the user will travel through in the path
     for (int i = 0; i < len; ++i) {
         int temp;
         cin >> temp;
