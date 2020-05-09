@@ -13,9 +13,7 @@ int main() {
          << "Created by Group 31: Logan Clark & Yuchen Rao" << endl
          << "==================================================" << endl;
     Grid *grid;
-    do {
-        cout << '\n' << "Press 'Enter' Key to continue..." << endl;
-    } while (cin.get() != '\n');
+//        system("pause");
 
     cout << "\n==================================================" << endl
          << "                    Map Setting                   " << endl
@@ -61,6 +59,7 @@ syncronize:
 //create thread array for junction light sequence
     thread jThread[grid->len * grid->wid];
     for (int count = 0; count < grid->len * grid->wid; count++) {
+        if(jThread[count].joinable())
         jThread[count] = grid->myNetwork[count]->simulate_one_tick();
     }
     cout << "Traffic Light System Start\n";
@@ -182,7 +181,9 @@ path:
             roadUserThread = motorcycle->drive();
         }
     }
-    //joins road user and pedestrian threads, ensuring they are executed simultaneously
-    roadUserThread.join();
-    pedThread.join();
+    //joins road user and pedestrian threads
+    if(roadUserThread.joinable())
+        roadUserThread.join();
+    if(pedThread.joinable())
+        pedThread.join();
 }

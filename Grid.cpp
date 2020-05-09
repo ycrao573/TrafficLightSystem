@@ -85,6 +85,6 @@ Grid::Grid(int len, int wid) {
 }
 
 Grid::~Grid() {
-    if(!myNetwork.empty())
-        myNetwork.clear();
+//    if(!myNetwork.empty())
+//        myNetwork.clear();
 }

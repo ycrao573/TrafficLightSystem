@@ -21,7 +21,7 @@ Road::Road(char direction, int length, int width) {
 }
 
 Road::~Road() {
-    if(trafficLight!=nullptr)
+    if(trafficLight->time != 0)
         delete trafficLight;
 }
 

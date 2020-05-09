@@ -97,6 +97,13 @@ bool RoadUser::isPassJunction() {
     if (x == currentJunction->ctr_x && y == currentJunction->ctr_y) {
         thruJunction();
         flag_passed = true;
+        //if destination has been reached, stop program
+//        if (juncSeqPtr == juncSeq.end()) {
+//            cout << "You have reached your destination" << endl;
+//            stop();
+//            reachDestination = true;
+//            exit(0);
+//        }
         return true;
     //as user has already passed junction, next junction is set 
     } else if (flag_passed) {
@@ -104,18 +111,14 @@ bool RoadUser::isPassJunction() {
         juncSeqPtr++;
         flag_passed = false;
     }
+
     return false;
 }
 
 //function definition for changing user direction once they have reached junction
-void RoadUser::thruJunction() {  
-    //if destination has been reached, stop program
-    if (juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x) {
-        cout << "You have reached your destination" << endl;
-        stop();
-        reachDestination = true;
+void RoadUser::thruJunction() {
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
-    } else if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
+    if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
         cout << "PASSING THE JUNCTION NOW" << endl;
         setCurrentRoad(nextRoad);

@@ -53,9 +53,9 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
 }
 
 Junction::~Junction() {
-    if(!roadSeq.empty() || pedestrianLight != nullptr){
+    if (!roadSeq.empty() && pedestrianLight != nullptr && currentRoad != roadSeq.end()) {
         roadSeq.clear();
-        delete[] pedestrianLight;
+        delete pedestrianLight;
     }
 }
 

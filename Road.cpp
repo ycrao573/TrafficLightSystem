@@ -21,8 +21,8 @@ Road::Road(char direction, int length, int width) {
 }
 
 Road::~Road() {
-    if(trafficLight!=nullptr)
-        delete trafficLight;
+//    if(trafficLight != nullptr)
+//        delete trafficLight;
 }
 
 //function definition for returning road direction

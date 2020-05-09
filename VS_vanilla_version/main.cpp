@@ -13,9 +13,8 @@ int main() {
          << "Created by Group 31: Logan Clark & Yuchen Rao" << endl
          << "==================================================" << endl;
     Grid *grid = nullptr;
-    do {
-        cout << '\n' << "Press 'Enter' Key to continue..." << endl;
-    } while (cin.get() != '\n');
+
+    system("pause");
 
     cout << "\n==================================================" << endl
          << "                    Map Setting                   " << endl
@@ -184,6 +183,8 @@ path:
         }
     }
     //joins road user and pedestrian threads, ensuring they are executed simultaneously
-    roadUserThread.join();
-    pedThread.join();
+    if(roadUserThread.joinable())
+        roadUserThread.join();
+    if(pedThread.joinable())
+        pedThread.join();
 }

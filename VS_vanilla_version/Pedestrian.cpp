@@ -28,7 +28,7 @@ void Pedestrian::move() {
         if (currentJunction->pedestrianLight->canPass)
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
         else
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0) {
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
@@ -70,21 +70,16 @@ thread Pedestrian::walk() {
 
 //function definition to execute pedestrian crossing the junction
 void Pedestrian::thruJunction() {
-    //once the destination has been reached, program is stopped
-    if (juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x) {
-        cout << "You have reached your destination" << endl;
-        stop();
-        reachDestination = true;
-    }
     //initiates pedestrian crossing the junction
     if (currentJunction->pedestrianLight->canPass) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "Pedestrian Crossing the Junction!" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
         //generates time interval taken for pedestrain to cross road
-        Sleep(currentRoad->getWidth() / getSpeed() * 2000);
+        Sleep(currentRoad->getWidth() / getSpeed() * 1000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;
         start();
@@ -105,9 +100,18 @@ bool Pedestrian::isPassJunction() {
         return true;
     } else if (flag_passed) {
         //when pedestrian has passed the junctio, next junction generated
-        setNextJunction(*juncSeqPtr);
-        juncSeqPtr++;
+        if (juncSeqPtr != juncSeq.end()) {
+            setNextJunction(*juncSeqPtr);
+            juncSeqPtr++;
+        }
         flag_passed = false;
+    }
+    //once the destination has been reached, program is stopped
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
+        cout << "You have reached your destination" << endl;
+        stop();
+        reachDestination = true;
+        exit(0);
     }
     return false;
 }

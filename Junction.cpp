@@ -54,10 +54,10 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
 
 
 Junction::~Junction() {
-    if(!roadSeq.empty() || pedestrianLight != nullptr){
-        roadSeq.clear();
-        delete[] pedestrianLight;
-    }
+//    if(!roadSeq.empty() && pedestrianLight != nullptr && currentRoad != roadSeq.end()){
+//        roadSeq.clear();
+//        delete pedestrianLight;
+//    }
 }
 
 //function definition for simulating one junction

@@ -29,12 +29,17 @@ Grid::Grid(int len, int wid) {
         myNetwork.push_back(new Junction(150, 100, "Junction 2"));
         //in this case since it is 1*2, there is 1 other junction in the east direction, so all but 1 pointer is null
         myNetwork[0]->setCloseJunctions(nullptr, myNetwork[1], nullptr, nullptr);
+        cout << "Here is the grid created: \n\n\n"
+            << " junction1    junction2 \n\n\n";
     }
     else if (len == 1 && wid == 2) {  //2*1 grid
         myNetwork.push_back(new Junction(100, 100, "Junction 1"));
         myNetwork.push_back(new Junction(100, 150, "Junction 2"));
         //in this case since it is 2*1, there is 1 other junction in the south direction, so all but 1 pointer is null
         myNetwork[0]->setCloseJunctions(nullptr, nullptr, nullptr, myNetwork[2]);
+        cout << "Here is the grid created: \n\n\n"
+            << " junction1 \n\n\n"
+            << " junction2 \n\n\n";
     }
     else if (len == 2 && wid == 2)    //2*2 grid
     {

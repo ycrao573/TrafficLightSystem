@@ -40,7 +40,7 @@ void RoadUser::move() {
     while (!reachDestination) {
         //change font colour to show the state of the traffic light of the currrent road
         if (currentRoad->trafficLight->getState() == "R")
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
         else if (currentRoad->trafficLight->getState() == "G")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
         else
@@ -54,8 +54,8 @@ void RoadUser::move() {
                  << currentJunction->name << endl;
             //if velocity is 0, car is waiting at the junction
         else {
-            //sets font colour back to black (default)
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            //sets font colour back to default
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             if (!currentJunction->pedestrianLight->canPass)
                 cout << "Waiting at junction..." << endl;
             else
@@ -100,8 +100,10 @@ bool RoadUser::isPassJunction() {
         return true;
     //as user has already passed junction, next junction is set 
     } else if (flag_passed) {
-        setNextJunction(*juncSeqPtr);
-        juncSeqPtr++;
+        if (juncSeqPtr != juncSeq.end()) {
+            setNextJunction(*juncSeqPtr);
+            juncSeqPtr++;
+        }
         flag_passed = false;
     }
     return false;
@@ -110,14 +112,15 @@ bool RoadUser::isPassJunction() {
 //function definition for changing user direction once they have reached junction
 void RoadUser::thruJunction() {  
     //if destination has been reached, stop program
-    if (juncSeqPtr == juncSeq.end() && currentJunction->ctr_y == y && currentJunction->ctr_x == x) {
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
         exit(0);
+    }
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
-    } else if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+     if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "PASSING THE JUNCTION NOW" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
