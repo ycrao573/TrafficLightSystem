@@ -86,8 +86,7 @@ syncronize:
     } while (len <= 0 || len > 20);
 
 //choose the path traversal sequence
-//creates a vector where each element represents 
-//which junctions the user will travel through in the path
+    
 path:
     vector<int> path;
     cout << "Choose Your Path: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
@@ -111,7 +110,7 @@ path:
         }
     }
     //user decides which road they start in within the grid
-    cout << "Choose Your Start Road Direction: (e.g. n) ";
+    cout << "Choose the Initial Direction in which you to Move: (e.g. n) ";
     string startRdDir;
     do {
         cin >> startRdDir;
@@ -152,6 +151,7 @@ path:
         ped->juncSeqPtr = ped->juncSeq.begin();
         //executes pedestrian movement simultaneously with the functionality of the rest of the system
         pedThread = ped->walk();
+        pedThread.join();
     } else{
         if (RoadUserType == "c") {
             RoadUser *car = new RoadUser(*grid->myNetwork[path[0] - 1], grid->myNetwork[path[0] - 1]->roadSeq[startRd], RoadUserType);
@@ -182,10 +182,7 @@ path:
             //executes motorcycle movement simultaneously with the functionality of the rest of the system
             roadUserThread = motorcycle->drive();
         }
-    }
-    //joins road user and pedestrian threads, ensuring they are executed simultaneously
-    if(roadUserThread.joinable())
         roadUserThread.join();
-    if(pedThread.joinable())
-        pedThread.join();
+    }
+    //joins road user and pedestrian threads, ensuring they are executed simultaneously        
 }

@@ -92,6 +92,13 @@ void Pedestrian::thruJunction() {
 
 //function definition for pedestrain passing junction
 bool Pedestrian::isPassJunction() {
+    //if destination has been reached, stop program
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
+        cout << "You have reached your destination" << endl;
+        stop();
+        reachDestination = true;
+        exit(0);
+    }
     //checks whether pedestrian has reached the junction
     if (x == currentJunction->ctr_x && y == currentJunction->ctr_y) {
         thruJunction();
@@ -105,13 +112,6 @@ bool Pedestrian::isPassJunction() {
             juncSeqPtr++;
         }
         flag_passed = false;
-    }
-    //once the destination has been reached, program is stopped
-    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
-        cout << "You have reached your destination" << endl;
-        stop();
-        reachDestination = true;
-        exit(0);
     }
     return false;
 }
