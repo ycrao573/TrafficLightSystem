@@ -110,7 +110,7 @@ path:
         }
     }
     //user decides which road they start in within the grid
-    cout << "Choose the Initial Direction in which you to Move: (e.g. n) ";
+    cout << "Choose the Initial Direction in which you want to move: (e.g. n) ";
     string startRdDir;
     do {
         cin >> startRdDir;

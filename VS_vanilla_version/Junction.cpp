@@ -9,10 +9,10 @@ using namespace std;
 //function definition for constructor - no data provided
 Junction::Junction() {
     //set start point for all the roads in junction
-    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength() - 5);
-    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength() + 5, ctr_y);
-    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength() + 5);
-    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength() - 5, ctr_y);
+    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
+    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
+    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength());
+    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);
     currentRoad = roadSeq.begin();
 }
 
@@ -22,10 +22,10 @@ Junction::Junction(int ctr_x, int ctr_y, string name) {
     this->ctr_x = ctr_x;
     this->name = name;
     //set start point for all the roads in junction
-    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength() - 5);
-    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength() + 5, ctr_y);
-    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength() + 5);
-    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength() - 5, ctr_y);
+    roadSeq[0].setStrPt(ctr_x, ctr_y + roadSeq[0].getLength());
+    roadSeq[1].setStrPt(ctr_x - roadSeq[1].getLength(), ctr_y);
+    roadSeq[2].setStrPt(ctr_x, ctr_y - roadSeq[2].getLength());
+    roadSeq[3].setStrPt(ctr_x + roadSeq[3].getLength(), ctr_y);;
     currentRoad = roadSeq.begin();
 }
 

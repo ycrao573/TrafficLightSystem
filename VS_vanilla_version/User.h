@@ -39,6 +39,7 @@ public:
     void setPt(int x, int y);
     int speed;
     int velocity = speed;
+    bool reachLastJunction = false;
 private:
     int NumOfCars;
 };

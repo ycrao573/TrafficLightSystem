@@ -43,9 +43,10 @@ void RoadUser::move() {
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
         else if (currentRoad->trafficLight->getState() == "G")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-        else
+        else if (currentRoad->trafficLight->getState() == "RA")
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x46);
+        else if (currentRoad->trafficLight->getState() == "A")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0)
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
@@ -104,6 +105,8 @@ bool RoadUser::isPassJunction() {
             setNextJunction(*juncSeqPtr);
             juncSeqPtr++;
         }
+        else
+            reachLastJunction = true;
         flag_passed = false;
     }
     return false;
@@ -112,7 +115,7 @@ bool RoadUser::isPassJunction() {
 //function definition for changing user direction once they have reached junction
 void RoadUser::thruJunction() {  
     //if destination has been reached, stop program
-    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;

@@ -70,6 +70,13 @@ thread Pedestrian::walk() {
 
 //function definition to execute pedestrian crossing the junction
 void Pedestrian::thruJunction() {
+    //if destination has been reached, stop program
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+        cout << "You have reached your destination" << endl;
+        stop();
+        reachDestination = true;
+        exit(0);
+    }
     //initiates pedestrian crossing the junction
     if (currentJunction->pedestrianLight->canPass) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -78,8 +85,9 @@ void Pedestrian::thruJunction() {
         setCurrentJunction(nextJunction);
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
-        //generates time interval taken for pedestrain to cross road
-        Sleep(currentRoad->getWidth() / getSpeed() * 1000);
+        //pedestrian cross road for 3 seconds
+        cout << "Crossing the road now. . ." << endl;
+        Sleep(3000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;
         start();
@@ -92,13 +100,6 @@ void Pedestrian::thruJunction() {
 
 //function definition for pedestrain passing junction
 bool Pedestrian::isPassJunction() {
-    //if destination has been reached, stop program
-    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x) {
-        cout << "You have reached your destination" << endl;
-        stop();
-        reachDestination = true;
-        exit(0);
-    }
     //checks whether pedestrian has reached the junction
     if (x == currentJunction->ctr_x && y == currentJunction->ctr_y) {
         thruJunction();
@@ -111,6 +112,8 @@ bool Pedestrian::isPassJunction() {
             setNextJunction(*juncSeqPtr);
             juncSeqPtr++;
         }
+        else
+            reachLastJunction = true;
         flag_passed = false;
     }
     return false;
