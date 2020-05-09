@@ -1,5 +1,5 @@
 #include "User.h"
-//required for inputtig and outputting data
+//required for inputting and outputting data
 #include <iostream>
 
 using namespace std;
