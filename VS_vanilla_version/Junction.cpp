@@ -52,6 +52,7 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     }
 }
 
+//function definition for destructor for junction
 Junction::~Junction() {
     if (!roadSeq.empty() && pedestrianLight != nullptr && currentRoad != roadSeq.end()) {
         roadSeq.clear();

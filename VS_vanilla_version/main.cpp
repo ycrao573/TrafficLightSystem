@@ -86,7 +86,8 @@ syncronize:
     } while (len <= 0 || len > 20);
 
 //choose the path traversal sequence
-    
+//creates a vector where each element represents 
+//which junctions the user will travel through in the path
 path:
     vector<int> path;
     cout << "Choose Your Path: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";

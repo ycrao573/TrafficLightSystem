@@ -90,6 +90,7 @@ Grid::Grid(int len, int wid) {
     }
 }
 
+//function defintion for a destructor for grid
 Grid::~Grid() {
     if (!myNetwork.empty())
         myNetwork.clear();
