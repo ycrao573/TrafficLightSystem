@@ -68,12 +68,12 @@ syncronize:
 //User chooses the role and path
     string Type, RoadUserType;
     do {
-        cout << "Choose your role: Road User(r) or Pedestrian(p): \n";
+        cout << "\nChoose your role: Road User(r) or Pedestrian(p): \n";
         cin >> Type;
         //user has to decide if they are a bike, car or motorcycle
         if (Type == "r")
             do {
-                cout << "Please specify your road user role: Car(c) or Bike(b) or Motorcycle(m) : \n";
+                cout << "\nPlease specify your road user role: Car(c) or Bike(b) or Motorcycle(m) : \n";
                 cin >> RoadUserType;
             } while (RoadUserType != "c" && RoadUserType != "b" && RoadUserType != "m");
     } while (Type != "r" && Type != "p");
@@ -81,7 +81,7 @@ syncronize:
     int len;
     //while loop will execute while invalid input defined in condition is not met
     do {
-        cout << "Enter the number of junctions in the route: \n";
+        cout << "\nEnter the number of junctions in the route: \n";
         cin >> len;
     } while (len <= 0 || len > 20);
 
@@ -89,14 +89,14 @@ syncronize:
     
 path:
     vector<int> path;
-    cout << "Choose Your route: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
+    cout << "\nChoose Your route: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
     for (int i = 0; i < len; ++i) {
         int temp;
         cin >> temp;
         path.push_back(temp);
         //ensures that path cannot be negative or greater than grid dimensions
         if (path[i] <= 0 || path[i] > grid->len * grid->wid) {
-            cout << "Invalid Input!\n";
+            cout << "\nInvalid Input!\n";
             goto path;
         }
     }
@@ -105,12 +105,12 @@ path:
         //check the centre point and if distance does not equal 50, the junctions are not adjacent
         if(abs((grid->myNetwork[path[i]-1]->ctr_x + grid->myNetwork[path[i]-1]->ctr_y)
             - (grid->myNetwork[path[i+1]-1]->ctr_x + grid->myNetwork[path[i+1]-1]->ctr_y)) != 50){
-            cout << "You can only go to adjacent junction! Please input the path again!" << endl;
+            cout << "\nYou can only go to adjacent junctions! Please enter the route again!" << endl;
             goto path;
         }
     }
     //user decides which road they start in within the grid
-    cout << "Choose the Initial Direction in which you want to move: (e.g. n) ";
+    cout << "\nChoose the Initial Direction in which you want to move: (e.g. n) ";
     string startRdDir;
     do {
         cin >> startRdDir;
