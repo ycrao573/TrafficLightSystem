@@ -25,8 +25,10 @@ grid:
     string grid_size;
     cout << "Please Input Your Grid Size: (e.g. 2*2)" << endl;
     cin >> grid_size;
-    if (grid_size == "1*1")
+    if (grid_size == "1*1") {
         grid = new Grid(1, 1);
+        exit(0);
+    }
     else if (grid_size == "2*1")
         grid = new Grid(1, 2);
     else if (grid_size == "1*2")
@@ -100,8 +102,9 @@ path:
             goto path;
         }
     }
-//make sure the path is valid (e.g. the path can't be diagonal)
+//make sure the path is valid (e.g. the path can't be diagonal or no u-turn path)
     for (int i = 0; i < len - 1; i++) {
+
         //check the centre point and if distance does not equal 50, the junctions are not adjacent
         if(abs((grid->myNetwork[path[i]-1]->ctr_x + grid->myNetwork[path[i]-1]->ctr_y)
             - (grid->myNetwork[path[i+1]-1]->ctr_x + grid->myNetwork[path[i+1]-1]->ctr_y)) != 50){
@@ -109,14 +112,39 @@ path:
             goto path;
         }
     }
+    for (int i = 0; i + 2 < len; i++) {
+        if (path[i] == path[i + 2]) {
+            cout << "You cannot do U-turn here\n";
+            goto path;
+        }
+    }
+
+startRd:
     //user decides which road they start in within the grid
     cout << "\nChoose the Initial Direction in which you want to move: (e.g. n) ";
     string startRdDir;
     do {
         cin >> startRdDir;
-    }
+    }    
     //condition to ensure correct start road is associated with user input
     while (startRdDir != "n" && startRdDir != "e" && startRdDir != "s" && startRdDir != "w");
+    
+    //make sure u-turn is invalid for the first junction
+    bool u_turn = false;
+    if (grid->myNetwork[path[0]-1]->northJunction == grid->myNetwork[path[1] - 1])
+        u_turn = (startRdDir[0] == 's');
+    else if (grid->myNetwork[path[0] - 1]->eastJunction == grid->myNetwork[path[1] - 1])
+        u_turn = (startRdDir[0] == 'w');
+    else if (grid->myNetwork[path[0] - 1]->southJunction == grid->myNetwork[path[1] - 1])
+        u_turn = (startRdDir[0] == 'n');
+    else if (grid->myNetwork[path[0] - 1]->westJunction == grid->myNetwork[path[1] - 1])
+        u_turn = (startRdDir[0] == 'e');
+    if (u_turn) {
+        cout << "You cannot do U-turn here\n";
+        goto startRd;
+    }
+        
+
     int startRd = 0;
     switch (startRdDir[0]) {
         case 'n':
