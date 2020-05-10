@@ -124,7 +124,7 @@ void RoadUser::thruJunction() {
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
      if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        cout << "PASSING THE JUNCTION NOW" << endl;
+        cout << "TRAFFIC LIGHT IS GREEN - PASSING " << currentJunction->name << " NOW" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         start();
