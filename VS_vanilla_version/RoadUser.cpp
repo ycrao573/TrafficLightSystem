@@ -50,7 +50,7 @@ void RoadUser::move() {
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0)
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
-                 << " to the Light.    Current Direction: " << currentRoad->getDirection() <<
+                 << "m to the Light.    Current Direction of travel: " << currentRoad->getDirection() <<
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
             //if velocity is 0, car is waiting at the junction
@@ -58,7 +58,7 @@ void RoadUser::move() {
             //sets font colour back to default
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             if (!currentJunction->pedestrianLight->canPass)
-                cout << "Waiting at junction..." << endl;
+                cout << "Waiting at " << currentRoad->roadName(currentRoad->getDirection()) <<" of " << currentJunction->name << "..." << endl;
             else
                 cout << "===PEDESTRIAN CROSSING!===" << endl;
         }
