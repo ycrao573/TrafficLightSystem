@@ -36,6 +36,7 @@ void Pedestrian::move() {
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
         } else {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             //display waiting message when pedestrain is unable to cross
             if (!currentJunction->pedestrianLight->canPass)
                 cout << "Waiting at junction..." << endl;
