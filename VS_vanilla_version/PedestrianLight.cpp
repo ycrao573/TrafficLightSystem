@@ -1,7 +1,3 @@
-//
-// Created by RYC on 2020/4/26.
-//
-
 //Windows.h required for sleep functionality
 #include "Windows.h"
 #include "pedestrianLight.h"
