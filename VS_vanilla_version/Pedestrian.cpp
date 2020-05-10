@@ -68,6 +68,7 @@ thread Pedestrian::walk() {
 void Pedestrian::thruJunction() {
     //if destination has been reached, stop program
     if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
