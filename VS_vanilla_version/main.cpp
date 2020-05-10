@@ -48,7 +48,7 @@ grid:
 //user decides if traffic lights are syncronised or working independently
 syncronize:
     string ans;
-    cout << "Do you want the traffic lights to be synchronised (y/n)?" << endl;
+    cout << "Do you want the traffic lights at each junction to be synchronised (y/n)?" << endl;
     cin >> ans;
     if (ans == "n")
         //iterates through traffic lights in grid and ensures they work independently 
@@ -73,7 +73,7 @@ syncronize:
         //user has to decide if they are a bike, car or motorcycle
         if (Type == "r")
             do {
-                cout << "please specify your road user role: Car(c) or Bike(b) or Motorcycle(m) : \n";
+                cout << "Please specify your road user role: Car(c) or Bike(b) or Motorcycle(m) : \n";
                 cin >> RoadUserType;
             } while (RoadUserType != "c" && RoadUserType != "b" && RoadUserType != "m");
     } while (Type != "r" && Type != "p");
@@ -81,7 +81,7 @@ syncronize:
     int len;
     //while loop will execute while invalid input defined in condition is not met
     do {
-        cout << "Input the path length: \n";
+        cout << "Enter the number of junctions in the route: \n";
         cin >> len;
     } while (len <= 0 || len > 20);
 
@@ -89,7 +89,7 @@ syncronize:
     
 path:
     vector<int> path;
-    cout << "Choose Your Path: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
+    cout << "Choose Your route: (e.g. 1 2 4) (Use Enter Key To Separate the Numbers)\n";
     for (int i = 0; i < len; ++i) {
         int temp;
         cin >> temp;
