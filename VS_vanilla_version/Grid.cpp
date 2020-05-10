@@ -4,6 +4,7 @@
 //function defintion for a constructor - no data provided
 //never occurs as user is repeatedly prompted to give grid dimensions
 Grid::Grid() {
+
 }
 
 //function defintion for a constructor - data provided
@@ -16,9 +17,11 @@ Grid::Grid(int len, int wid) {
         //push_back functionality utilised to add new junction element to myNetwork vector
         //associated central point of junction is also added to same element of myNetwork vector 
         myNetwork.push_back(new Junction(100, 100, "Junction 1"));
+        //virtual junction here, east of junction 1 by default
+        myNetwork.push_back(new Junction(150, 100, "Virtual Junction"));
         //connects junction (comprised of four roads) to no junctions
         //in this case since it is 1*1, there are no other junctions, so pointers to the other junctions are null
-        myNetwork[0]->setCloseJunctions(nullptr, nullptr, nullptr, nullptr);
+        myNetwork[0]->setCloseJunctions(nullptr, myNetwork[1], nullptr, nullptr);
     }
     else if (len == 2 && wid == 1) {  //1*2 grid
         myNetwork.push_back(new Junction(100, 100, "Junction 1"));
@@ -86,6 +89,7 @@ Grid::Grid(int len, int wid) {
     }
 }
 
+//function definition for destructor
 Grid::~Grid() {
     if (!myNetwork.empty())
         myNetwork.clear();

@@ -10,8 +10,9 @@ class Road {
 public:
     //constructor - creates instance when no data is provided
     Road();
-    // constructor - creates instance when data is provided
+    //constructor - creates instance when data is provided
     Road(char, int, int);
+    //destructor - destroys instance of class
     ~Road();
     char getDirection() const;
     int getLength() const;

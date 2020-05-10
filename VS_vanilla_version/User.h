@@ -15,8 +15,6 @@ class User
 public:
     //constructor - no data is provided
     User();               
-    //constructor - data is provided
-    User(Junction junction, Road road);
     //virtual method used to direct the function definition to the child class
     //function definition not required in parent class
     virtual void move(){};

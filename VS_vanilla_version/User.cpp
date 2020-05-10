@@ -10,10 +10,6 @@ User::User() {
     setPt(0, 0);
 }
 
-User::User(Junction junction, Road road)
-{
-}
-
 //function definiton for stopping user movement
 void User::stop() {
     setVelocity(0);

@@ -34,6 +34,12 @@ RoadUser::RoadUser(Junction& junction, Road& road, string type) {
 //function definition for movement of road user
 void RoadUser::move() {
     while (!reachDestination) {
+        if (currentJunction->name == "Virtual Junction") {
+            cout << "You have passed Junction 1! " << endl;
+            stop();
+            reachDestination = true;
+            exit(0);
+        }
         //change font colour to show the state of the traffic light of the currrent road
         if (currentRoad->trafficLight->getState() == "R")
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
@@ -109,19 +115,19 @@ bool RoadUser::isPassJunction() {
 }
 
 //function definition for changing user direction once they have reached junction
-void RoadUser::thruJunction() {  
+void RoadUser::thruJunction() {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     //if destination has been reached, stop program
-    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    if(juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
         exit(0);
     }
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
-     if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        cout << "TRAFFIC LIGHT IS GREEN - PASSING " << currentJunction->name << " NOW" << endl;
+    if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
+        if (currentJunction->name != "Virtual Junction")
+            cout << "traffic light is green - passing " << currentJunction->name << " now" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         start();

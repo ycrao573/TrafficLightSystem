@@ -1,0 +1,23 @@
+To build and run the program, use any IDE that has a compiler compatible with C++ (Such as Microsoft Visual Studio 2019). 
+It should be noted that the project file will need to be unzipped.
+Once Visual Studio (VS) has been opened, ensure all .h files contained within the zip file are copied into the header file directory.
+Similarly, all the .cpp files (including the main.cpp) will need to be moved into the source file directory of VS. 
+The solution can then be built and once it has been, the program can be started.
+
+"Grid.h" - contains the class declartion for the Grid class
+"Grid.cpp" - contains the method defintions for the Grid class
+"Junction.h" - contains the class declartion for the Junction class
+"Junction.cpp" - contains the method defintions for the Junction class
+"PedestrianLight.h" - contains the class declartion for the PedestrianLight class
+"PedestrianLight.cpp" - contains the method defintions for the PedestrianLight class
+"Road.h" - contains the class declartion for the Road class
+"Road.cpp" - contains the method defintions for the Road class
+"TrafficLight.h" - contains the class declartion for the TrafficLight class
+"TrafficLight.cpp" - contains the method defintions for the TrafficLight class
+"User.h" - contains the class declartion for the User class
+"User.cpp" - contains the method defintions for the User class
+"RoadUser.h" - contains the class declartion for the RoadUser class
+"RoadUser.cpp" - contains the method defintions for the RoadUser class
+"Pedestrian.h" - contains the class declartion for the Pedestrian class
+"Pedestrian.cpp" - contains the method defintions for the Pedestrian class
+"main.cpp" - controls the simulation of the traffic light network (enables user control)

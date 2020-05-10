@@ -12,6 +12,7 @@ public:
     Grid();
     //constructor - data provided
     Grid(int len, int wid);
+    //destructor - destroys instance of class
     ~Grid();
     int len, wid;
     //grid consists of a vector of junctions

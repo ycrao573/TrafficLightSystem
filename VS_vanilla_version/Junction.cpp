@@ -48,6 +48,7 @@ Junction::Junction(int ctr_x, int ctr_y, string name, char del_road) {
     }
 }
 
+//function definition for destructor
 Junction::~Junction() {
     if (!roadSeq.empty() && pedestrianLight != nullptr && currentRoad != roadSeq.end()) {
         roadSeq.clear();
@@ -99,7 +100,9 @@ void Junction::setCloseJunctions(Junction *west, Junction *east, Junction *north
 void Junction::generateIndepSeq() {
     //generate random time for the traffic light time sequence by randomising the green light
     srand((unsigned) time(0));
-    int delay[4] = {1, 1, (1 + (rand() % 10)), 1};
-    for (int index = 0; index < roadSeq.size(); index++)
+    for (int index = 0; index < roadSeq.size(); index++){
+        int delay[4] = { 1, 1, (4 + (rand() % 10)), 1 };
         this->roadSeq[index].trafficLight->setDelays(delay);
+    }
+    this->pedestrianLight->setDelays(4 + (rand() % 6));
 }

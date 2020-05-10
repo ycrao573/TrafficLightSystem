@@ -16,6 +16,7 @@ Road::Road(char direction, int length, int width) {
     this->width = width;
 }
 
+//function definition for destructor
 Road::~Road() {
     if(trafficLight->time != 0)
         delete trafficLight;
