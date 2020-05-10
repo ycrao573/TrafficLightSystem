@@ -1,7 +1,3 @@
-//
-// Created by RYC on 2020/4/14.
-//
-
 #include "RoadUser.h"
 //allows user to input and output to the system
 #include <iostream>
@@ -50,7 +46,7 @@ void RoadUser::move() {
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0)
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
-                 << " to the Light.    Current Direction: " << currentRoad->getDirection() <<
+                 << " m to the Light.    Current Direction of travel: " << currentRoad->getDirection() <<
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
             //if velocity is 0, car is waiting at the junction
@@ -58,7 +54,7 @@ void RoadUser::move() {
             //sets font colour back to default
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             if (!currentJunction->pedestrianLight->canPass)
-                cout << "Waiting at junction..." << endl;
+                cout << "Waiting at " << currentRoad->roadName(currentRoad->getDirection()) <<" of " << currentJunction->name << "..." << endl;
             else
                 cout << "===PEDESTRIAN CROSSING!===" << endl;
         }
@@ -116,6 +112,7 @@ bool RoadUser::isPassJunction() {
 void RoadUser::thruJunction() {  
     //if destination has been reached, stop program
     if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
@@ -124,7 +121,7 @@ void RoadUser::thruJunction() {
     //road user can pass junction if no pedstrian is crossing the road and current road's traffic light is green
      if (currentRoad->trafficLight->getState() == "G" && !currentJunction->pedestrianLight->isCrossing) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        cout << "PASSING THE JUNCTION NOW" << endl;
+        cout << "TRAFFIC LIGHT IS GREEN - PASSING " << currentJunction->name << " NOW" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         start();

@@ -1,5 +1,5 @@
 #include "User.h"
-//required for inputtig and outputting data
+//required for inputting and outputting data
 #include <iostream>
 
 using namespace std;
@@ -12,24 +12,6 @@ User::User() {
 
 User::User(Junction junction, Road road)
 {
-}
-
-//function definiton for adding more cars to the road
-User User::operator+(User a) {
-    //create new instance of User class
-    User c;
-    //Increase number of cars
-    c.NumOfCars = this->NumOfCars + a.NumOfCars;
-    return c;
-}
-
-//function definiton for adding more cars to the road
-User User::operator-(User a) {
-    //create new instance of User class
-    User c;
-    //decrease number of cars
-    c.NumOfCars = this->NumOfCars - a.NumOfCars;
-    return c;
 }
 
 //function definiton for stopping user movement

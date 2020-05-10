@@ -1,7 +1,3 @@
-//
-// Created by RYC on 2020/4/14.
-//
-
 #include "Pedestrian.h"
 
 //function definition for constructor - no data provided
@@ -32,14 +28,14 @@ void Pedestrian::move() {
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0) {
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
-                 << " to the Light.    Current Direction: " << currentRoad->getDirection() <<
+                 << " m to the Light.    Current Direction of travel: " << currentRoad->getDirection() <<
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
         } else {
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             //display waiting message when pedestrain is unable to cross
             if (!currentJunction->pedestrianLight->canPass)
-                cout << "Waiting at junction..." << endl;
+                cout << "Waiting at " << currentRoad->roadName(currentRoad->getDirection()) <<" of " << currentJunction->name << "..." << endl;
         }
         //generates 1 second time interval
         Sleep(1000);
@@ -73,6 +69,7 @@ thread Pedestrian::walk() {
 void Pedestrian::thruJunction() {
     //if destination has been reached, stop program
     if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
@@ -81,13 +78,13 @@ void Pedestrian::thruJunction() {
     //initiates pedestrian crossing the junction
     if (currentJunction->pedestrianLight->canPass) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        cout << "Pedestrian Crossing the Junction!" << endl;
+        cout << "Pedestrian Crossing " << currentJunction->name << "!" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
         //pedestrian cross road for 3 seconds
-        cout << "Crossing the road now. . ." << endl;
+        cout << "Crossing the " << currentRoad->roadName(currentRoad->getDirection()) << " road now. . ." << endl;
         Sleep(3000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;

@@ -20,14 +20,6 @@ public:
     //virtual method used to direct the function definition to the child class
     //function definition not required in parent class
     virtual void move(){};
-    //operator overloading utilised so that...
-    //when increase num of cars button is selected...
-    //num of cars is increased
-    User operator+(User);
-    //operator overloading utilised so that...
-    //when decrease num of cars button is selected...
-    //num of cars is decreased
-    User operator-(User);
     void stop();
     void start();
     //variables associated with x and y postition in map
@@ -40,8 +32,6 @@ public:
     int speed;
     int velocity = speed;
     bool reachLastJunction = false;
-private:
-    int NumOfCars;
 };
 
 #endif
