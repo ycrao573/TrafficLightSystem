@@ -1,7 +1,3 @@
-//
-// Created by RYC on 2020/4/14.
-//
-
 #include "RoadUser.h"
 //allows user to input and output to the system
 #include <iostream>
@@ -116,6 +112,7 @@ bool RoadUser::isPassJunction() {
 void RoadUser::thruJunction() {  
     //if destination has been reached, stop program
     if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
