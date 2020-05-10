@@ -32,7 +32,7 @@ void Pedestrian::move() {
         //if velocity is not 0, show distance to the next Junction
         if (velocity != 0) {
             cout << abs(x + y - (currentJunction->ctr_x + currentJunction->ctr_y))
-                 << "m to the Light.    Current Direction of travel: " << currentRoad->getDirection() <<
+                 << " m to the Light.    Current Direction of travel: " << currentRoad->getDirection() <<
                  "    Location: " << currentRoad->roadName(currentRoad->getDirection()) << " of "
                  << currentJunction->name << endl;
         } else {
