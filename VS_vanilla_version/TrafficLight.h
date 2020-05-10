@@ -15,15 +15,12 @@ public:
     //constructor - creates instance of traffic light when data is provided
     //pointer required to point to the array of delay times
     TrafficLight(int *delayPtr);        
-    //method to check if traffic light state needs to be updated
     bool needsUpdate(int current_time);
     //method to update traffic light state e.g. R -> RA
     void doUpdate(int current_time);
-    //method to return the current state of the traffic light
     string getState();
     //setter method used to assign values to delay times of each state
     void setDelays(int* delayPtr);
-    //timer used to keep track of time elapsed in system
     int time = 0;
     //method used to run one light sequence 
     void run_one_cycle();
@@ -39,7 +36,6 @@ public:
     vector<pair<string, int>>::iterator current_state = state_pair.begin();
     //updates the time when the traffic light state ends
     int lastUpdate;
-    //variables associated with delay of each state
     int Rtime, RAtime = 1, Gtime, Atime = 1;
     //variable for total time taken for light sequence 
     int period;
