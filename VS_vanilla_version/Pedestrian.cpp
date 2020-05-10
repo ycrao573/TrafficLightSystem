@@ -80,13 +80,13 @@ void Pedestrian::thruJunction() {
     //initiates pedestrian crossing the junction
     if (currentJunction->pedestrianLight->canPass) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        cout << "Pedestrian Crossing the Junction!" << endl;
+        cout << "Pedestrian Crossing " << currentJunction->name << "!" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
         //pedestrian cross road for 3 seconds
-        cout << "Crossing the road now. . ." << endl;
+        cout << "Crossing the " << currentRoad->roadName(currentRoad->getDirection()) << " road now. . ." << endl;
         Sleep(3000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;
