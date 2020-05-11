@@ -74,15 +74,8 @@ thread Pedestrian::walk() {
 //function definition to execute pedestrian crossing the junction
 void Pedestrian::thruJunction() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    if (juncSeq.empty()) {
-        cout << "Passing the " << currentRoad->roadName(currentRoad->getDirection()) << " of " << currentJunction->name << endl;
-        cout << "You have reached your destination: " << currentRoad->roadName(currentRoad->getDirection()) << endl;
-        stop();
-        reachDestination = true;
-        exit(0);
-    }
     //if destination has been reached, stop program
-    else if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
+    if (juncSeq.back()->ctr_y == y && juncSeq.back()->ctr_x == x && reachLastJunction) {
         cout << "You have reached your destination" << endl;
         stop();
         reachDestination = true;
@@ -90,14 +83,15 @@ void Pedestrian::thruJunction() {
     }
     //initiates pedestrian crossing the junction
     if (currentJunction->pedestrianLight->canPass) {
-        cout << "Pedestrian Crossing " << currentJunction->name << "!" << endl;
         setCurrentRoad(nextRoad);
         setCurrentJunction(nextJunction);
         //true while pedestrian is crossing
         currentJunction->pedestrianLight->isCrossing = true;
         //pedestrian cross road for 3 seconds
         if(currentJunction->name != "Virtual Junction")
-            cout << "traffic light is green - crossing " << currentJunction->name << " now" << endl;
+            cout << "Pedestrian light is green - crossing now" << endl;
+        else
+            cout << "Pedestrian light is green - crossing " << currentJunction->name << " now" << endl;
         Sleep(3000);
         //false when pedestrian has crossed
         currentJunction->pedestrianLight->isCrossing = false;
